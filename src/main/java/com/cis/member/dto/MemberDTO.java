@@ -1,15 +1,11 @@
-package com.cis.test.dto;
+package com.cis.member.dto;
 
-import jakarta.validation.constraints.Pattern;
 
 public class MemberDTO {
-//    @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String emp_id;
-//    @NotBlank(message = "주민등록번호는 필수 입력 값입니다.")
     private String resident_num;
 
-//    @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!])[a-z\\d@#$%^&+=!]{8,20}$")
+
     private String emp_pass;
     private String create_at;
     private String post_addr;
