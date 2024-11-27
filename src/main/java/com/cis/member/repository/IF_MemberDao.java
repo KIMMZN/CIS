@@ -1,6 +1,6 @@
-package com.cis.test.repository;
+package com.cis.member.repository;
 
-import com.cis.test.dto.MemberDTO;
+import com.cis.member.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
