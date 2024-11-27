@@ -1,8 +1,7 @@
-package com.cis.test.controller;
+package com.cis.member.controller;
 
-import com.cis.test.dto.MemberDTO;
-import com.cis.test.service.IF_MemberService;
-import jakarta.validation.Valid;
+import com.cis.member.dto.MemberDTO;
+import com.cis.member.service.IF_MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +54,7 @@ public class MemberController {
 
     // "사원가입"에서 "사원가입" 클릭시.
     @PostMapping("/employee_join")
-    public String employee_join(@Valid @ModelAttribute MemberDTO memberdto, Errors errors, Model model)throws Exception {
+    public String employee_join(@ModelAttribute MemberDTO memberdto, Errors errors, Model model)throws Exception {
         if(errors.hasErrors()){
             model.addAttribute("memberdto",memberdto);
             Map<String, String> validatorResult = memberService.validateHandling(errors);
@@ -76,16 +75,6 @@ public class MemberController {
     }
 
 
-
-//    @PostMapping(value="ajaxStr")
-//    @ResponseBody
-//    public Map<String, String> check_pass(@RequestBody String emp_id) throws Exception {
-//        System.out.println("ajax로 입력받은 id : " + emp_id);
-////        Map<String, String> validatorResult = memberService.validateHandling(null);
-//        return "emp_id";
-//
-//
-//    }
 
 
 
