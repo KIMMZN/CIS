@@ -1,6 +1,6 @@
-package com.cis.test.service;
+package com.cis.member.service;
 
-import com.cis.test.dto.MemberDTO;
+import com.cis.member.dto.MemberDTO;
 import org.springframework.validation.Errors;
 
 import java.util.Map;
