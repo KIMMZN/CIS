@@ -127,6 +127,8 @@ public class Pagination {
     public Pagination(int totalListCnt, int nowPage) {
         // 현재 페이지, 튜플의 전체 수 저장
         setNowPage(nowPage);
+        // 만약 DB에서 조회한 리스트의 수가 없을 경우 1로 고정 (에러 방지)
+        if (totalListCnt <= 0) totalListCnt = 1;
         setTotalListCnt(totalListCnt);
 
         // Math.ceil : 반올림을 위해 Math 클래스의 ceil 메서드 사용
