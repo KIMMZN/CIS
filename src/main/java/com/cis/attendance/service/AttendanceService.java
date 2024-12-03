@@ -24,6 +24,11 @@ public class AttendanceService implements IF_AttendanceService {
     }
 
     @Override
+    public void attendanceMod(AttendanceDTO attendanceDTO) throws Exception {
+        attendanceRepository.attendanceUpdate(attendanceDTO);;
+    }
+
+    @Override
     public int attendanceListCnt() throws Exception {
         return attendanceRepository.attendanceSelectAllCnt();
     }
