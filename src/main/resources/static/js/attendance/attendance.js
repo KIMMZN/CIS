@@ -12,6 +12,9 @@ let work_start = document.getElementsByClassName("work_start")[0];
 let work_end = document.getElementsByClassName("work_end")[0];
 let significant_btn = document.getElementsByClassName("significant_btn")[0];
 
+// 퇴근 버튼 클릭 시 출근 기록이 없거나, 이미 퇴근 처리가 된 경우
+let check_val = false;
+
 window.onload = () => {
     if (attendance_row.rows.length <= 0) {
         attendance_empty.style.display = "";
@@ -128,16 +131,18 @@ function work_end_check() {
     let check_end_time = attendance_row.rows[0].cells[2].innerText;
     if (!(check_date === now_date)) {
         alert("금일 출근 내역이 존재하지 않습니다.");
-        return;
+        return check_val = true;
     }
     if (check_date === now_date && !(check_end_time === "-")) {
         alert("이미 퇴근 처리 되었습니다.\n퇴근 내역을 확인해주세요.");
-        return;
+        return check_val = true;
     }
 }
 
 work_end.addEventListener("click", () => {
     work_end_check();
+
+    if (check_val) return;
 
     let significant_value = "퇴근";
 
@@ -148,6 +153,8 @@ work_end.addEventListener("click", () => {
 
 significant_btn.addEventListener("click", () => {
     work_end_check();
+
+    if (check_val) return;
 
     let significant = document.getElementById("significant");
     let significant_value = significant.selectedOptions[0].innerText;
