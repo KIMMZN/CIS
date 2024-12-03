@@ -9,7 +9,7 @@
         SELECT * FROM attendance ORDER BY work_date DESC LIMIT #{startIndex}, #{pageSize}
     </select>
     <update id="attendanceUpdate" parameterType="com.cis.attendance.dto.AttendanceDTO">
-        UPDATE attendance SET work_end=#{work_end}, work_total=#{work_total} WHERE work_date=#{work_date}
+        UPDATE attendance SET work_end=#{work_end}, work_total=#{work_total}, significant=#{significant} WHERE work_date=#{work_date}
     </update>
     <select id="attendanceSelectAllCnt" resultType="int">
         SELECT COUNT(*) FROM attendance
