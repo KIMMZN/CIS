@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIS : 메일 보내기</title>
-    <link rel="stylesheet" href="/css/base.css"/>
-    <link rel="stylesheet" href="/css/email/mail_send.css"/>
+    <title>CIS : 공지게시판 글 보기</title>
+    <link rel="stylesheet" href="/css/layout/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/board/write.css">
     <link rel="stylesheet" type="text/css" href="/css/board/preview.css">
+    <link rel="stylesheet" type="text/css" href="/css/board/modal_comment.css">
     <script src="https://kit.fontawesome.com/ae15ba340d.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -41,10 +42,12 @@
         <div class="mail_container">
             <div id="write">
                 <div class="write_main"><span>공지사항</span></div>
+                <input type="text" value="공지사항" readonly hidden="true" name="category" id="categoryId">
                 <div class="write_writer">
                     <div class="write_writer_name">
                         <label for="namebox">작성자</label>
-                        <input type="text" id="namebox" placeholder="작성자" readonly>
+                        <input type="text" id="namebox" placeholder="작성자" readonly
+                               th:value="${boardvo.emp_id}">
                         <!-- th:value="${boardvo.emp_id} "-->
 
                     </div>
@@ -54,7 +57,7 @@
                     <div class="write_title_name">
                         <label for="titlebox" class="title_font">제목</label>
                         <input type="text" id="titlebox" placeholder="제목을 입력하시오" readonly
-                        >
+                               th:value="${boardvo.board_title}" name="board_title">
                         <!--  th:value="${boardvo.board_title}" -->
                     </div>
 
@@ -63,88 +66,69 @@
                     <div class="write_text_name">
                         <label for="contextbox" class="context_font">글내용</label>
                         <textarea id="contextbox" placeholder="내용을 입력하시오 " readonly
-                        >
+                                  th:text="${boardvo.board_content}" name="board_content">
 
                 </textarea>
                         <!--th:text="${boardvo.board_content}"-->
                     </div>
 
                 </div>
+                <div class="files_container">
+                    <div class="files_btn_div">
+                        <ul id="fileListUl">
+                            <li>
+                                <label for="addbutton" hidden>파일 추가:</label>
+                                <input type="button" id="addbutton" value="파일추가" hidden>
+                            </li>
+                            <li th:each="fList: ${fileList}" th:data-file-id="${fList.file_id}">
+                                <a th:href="@{/fr_preview/{board_num}/{file_num}/{category}(board_num=${fList.board_num}, file_num=${fList.file_id}, category=${fList.category})}"
+                                   th:text="${fList.original_name}">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 파일 업로드 컨테이너 -->
+                </div>
+
                 <div class="update_delete_container">
                     <div class="update_delete_div">
                         <input type="button" value="목록" onclick="btnlist()">
-                        <input type="submit" value="수정">
-                        <input type="submit" value="삭제">
+                        <input type="submit" value="수정" id="modifybtn">
+                        <input type="submit" value="삭제" id="delbtn">
                     </div>
                 </div>
 
                 <div class="comment_div">
-                    <div class="Comment_title">
-                        <table>
-                            <thead>
-                            <tr><th>Comment</th></tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td >댓글내용:원진호!!</td>
-                                <td >작성자:시온</td>
-                            </tr>
 
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-- 댓글 확인 버튼 -->
 
-                    <form action="#" method="get" onsubmit="return confirm('정말 댓글을 등록하시겠습까?')">
-                        <div class="Comment_btn_div">
-                            <div class="Comment_writer_div">
-                                <label for="Comment_writer">작성자</label>
-                                <input type="text" id="Comment_writer" name="cmtWriter">
-                            </div>
-                            <div class="Comment_area_div">
-                                <label for="Comment_area"></label>
-                                <textarea name="textarea" id="Comment_area" placeholder="댓글남기기"></textarea>
-                                <input type="submit" value="댓글등록" class="Comment_btn">
-                            </div>
-                        </div>
-                    </form>
-
+                    <input type="button" id="check_comment" value="댓글 확인">
 
                 </div>
 
+                <!-- 댓글 모달 -->
 
+                <div id="commentModal" class="modal">
+                    <div class="modal-content">
+                        <span id="closeModal" class="close">&times;</span>
+                        <h2>댓글</h2>
+                        <div id="modalCommentList">
+                            <!-- 댓글 리스트가 여기에 로드 -->
+                        </div>
+                        <form id="modalCommentForm">
+                            <input type="text" id="modalCommentWriter" name="emp_id" placeholder="작성자" required>
+                            <textarea name="comment_content" id="modalCommentArea" placeholder="댓글을 입력하세요." required></textarea>
+                            <input type="submit" value="댓글 등록" class="modal-comment-btn">
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+    <footer th:replace="~{layout/footer::footer}"></footer>
 </div>
 </body>
-<script>
-
-    function btnlist() {
-        alert("asdf")
-
-    }
-
-    /*
-    let cmtbtn = document.querySelector(".Comment_btn").addEventListener("click",()=> {
-          let writer = document.querySelector('#Comment_writer');
-          let cmtcontent = document.querySelector('#Comment_area');
-
-
-          alert(writer.value);
-          alert(cmtcontent.value);
-
-       alert("댓글등록하지마");
-    });
-     */
-
-
-
-
-
-
-
-
-
-</script>
+<script src="/js/board/board_gj_preview.js"></script>
+<script src="/js/board/board_comment.js"></script>
 
 </html>
