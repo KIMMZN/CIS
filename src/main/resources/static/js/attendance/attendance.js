@@ -8,7 +8,7 @@ let month = String(today.getMonth() + 1).padStart(2,'0');
 let day = String(today.getDate()).padStart(2,'0');
 let now_date = (year + "-" + month + "-" + day);
 
-let work_start = document.getElementsByClassName("work_start")[0];;
+let work_start = document.getElementsByClassName("work_start")[0];
 let work_end = document.getElementsByClassName("work_end")[0];
 let significant_btn = document.getElementsByClassName("significant_btn")[0];
 
@@ -45,6 +45,12 @@ window.onload = () => {
 }
 
 work_start.addEventListener("click", () => {
+    let check_date = attendance_row.rows[0].cells[0].innerText;
+    if (check_date === now_date) {
+        alert("이미 출근 처리 되었습니다.\n출근 내역을 확인해주세요.");
+        return;
+    }
+
     work_start.style.display = "none";
     work_end.style.display = "";
 
@@ -55,7 +61,7 @@ work_start.addEventListener("click", () => {
     // const emp_id_input = document.createElement("input");
     // emp_id_input.setAttribute("type", "hidden");
     // emp_id_input.setAttribute("name", "emp_id");
-    // emp_id_input.setAttribute("value", emp_id)
+    // emp_id_input.setAttribute("value", emp_id);
 
     let hour = today.getHours();
     let minute = today.getMinutes();
@@ -106,7 +112,7 @@ function leaveWork(significant_value) {
     const work_total_input = document.createElement("input");
     work_total_input.setAttribute("type", "hidden");
     work_total_input.setAttribute("name", "work_total");
-    work_total_input.setAttribute("value", work_total_time);
+    work_total_input.setAttribute("value", work_total_time + "");
 
     form.appendChild(work_date_input);
     form.appendChild(work_end_input);
@@ -117,7 +123,22 @@ function leaveWork(significant_value) {
     form.submit();
 }
 
+function work_end_check() {
+    let check_date = attendance_row.rows[0].cells[0].innerText;
+    let check_end_time = attendance_row.rows[0].cells[2].innerText;
+    if (!(check_date === now_date)) {
+        alert("금일 출근 내역이 존재하지 않습니다.");
+        return;
+    }
+    if (check_date === now_date && !(check_end_time === "-")) {
+        alert("이미 퇴근 처리 되었습니다.\n퇴근 내역을 확인해주세요.");
+        return;
+    }
+}
+
 work_end.addEventListener("click", () => {
+    work_end_check();
+
     let significant_value = "퇴근";
 
     if (!(confirm("정말 사유 없이 퇴근합니까?"))) return;
@@ -126,6 +147,8 @@ work_end.addEventListener("click", () => {
 });
 
 significant_btn.addEventListener("click", () => {
+    work_end_check();
+
     let significant = document.getElementById("significant");
     let significant_value = significant.selectedOptions[0].innerText;
 
