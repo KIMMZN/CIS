@@ -64,7 +64,6 @@ section {
     width: 30%;
     height: 50px;
     border: 1px solid black;
-    margin-right: 40px;
     padding: 10px 15px;
 }
 .significant_btn {
@@ -74,6 +73,7 @@ section {
     height: 40px;
     border: 1px solid black;
     border-radius: 15px;
+    margin-left: 40px;
     padding: 5px 10px;
 }
 .significant_btn:hover {
