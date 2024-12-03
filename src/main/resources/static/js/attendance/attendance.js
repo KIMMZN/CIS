@@ -10,6 +10,7 @@ let now_date = (year + "-" + month + "-" + day);
 
 let work_start = document.getElementsByClassName("work_start")[0];;
 let work_end = document.getElementsByClassName("work_end")[0];
+let significant_btn = document.getElementsByClassName("significant_btn")[0];
 
 window.onload = () => {
     if (attendance_row.rows.length <= 0) {
@@ -73,9 +74,7 @@ work_start.addEventListener("click", () => {
     form.submit();
 });
 
-work_end.addEventListener("click", () => {
-    if (!(confirm("정말 사유 없이 퇴근합니까?"))) return;
-
+function leaveWork(significant_value) {
     const form = document.createElement("form");
     form.setAttribute("method", "post");
     form.setAttribute("action", "leave_work");
@@ -94,6 +93,11 @@ work_end.addEventListener("click", () => {
     work_end_input.setAttribute("name", "work_end");
     work_end_input.setAttribute("value", work_end_time);
 
+    const significant_input = document.createElement("input");
+    significant_input.setAttribute("type", "hidden");
+    significant_input.setAttribute("name", "significant");
+    significant_input.setAttribute("value", significant_value);
+
     let work_start = attendance_row.rows[0].cells[1].innerText;
     let start_hour = parseInt(work_start.substring(0, 2));
     let start_minute = parseInt(work_start.substring(3, 5));
@@ -106,7 +110,26 @@ work_end.addEventListener("click", () => {
 
     form.appendChild(work_date_input);
     form.appendChild(work_end_input);
+    form.appendChild(significant_input);
     form.appendChild(work_total_input);
     document.body.appendChild(form);
+
     form.submit();
+}
+
+work_end.addEventListener("click", () => {
+    let significant_value = "퇴근";
+
+    if (!(confirm("정말 사유 없이 퇴근합니까?"))) return;
+
+    leaveWork(significant_value);
+});
+
+significant_btn.addEventListener("click", () => {
+    let significant = document.getElementById("significant");
+    let significant_value = significant.selectedOptions[0].innerText;
+
+    if (!(confirm("사유 : " + significant_value))) return;
+
+    leaveWork(significant_value);
 });
