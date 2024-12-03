@@ -11,6 +11,7 @@ let now_date = (year + "-" + month + "-" + day);
 let work_start = document.getElementsByClassName("work_start")[0];
 let work_end = document.getElementsByClassName("work_end")[0];
 let significant_btn = document.getElementsByClassName("significant_btn")[0];
+let significant_select_box = document.getElementById("significant");
 
 // 퇴근 버튼 클릭 시 출근 기록이 없거나, 이미 퇴근 처리가 된 경우
 let check_val = false;
@@ -35,9 +36,6 @@ window.onload = () => {
 
                 commute_container.appendChild(text);
 
-                const significant_select_box = document.getElementById("significant");
-                const significant_btn = document.getElementsByClassName("significant_btn")[0];
-
                 significant_select_box.disabled = "disabled";
                 significant_btn.disabled = "disabled";
                 significant_btn.style.display = "none";
@@ -45,7 +43,15 @@ window.onload = () => {
             work_start.style.display = "none";
         } else {
             work_end.style.display = "none";
+            significant_select_box.disabled = "disabled";
+            significant_btn.disabled = "disabled";
         }
+    }
+
+    if (work_start.style.display === "") {
+        significant_select_box.disabled = "disabled";
+        significant_btn.disabled = "disabled";
+        significant_btn.style.display = "none";
     }
 }
 
@@ -60,6 +66,8 @@ work_start.addEventListener("click", () => {
 
     work_start.style.display = "none";
     work_end.style.display = "";
+    significant_select_box.disabled = "enabled";
+    significant_btn.disabled = "enabled";
 
     const form = document.createElement("form");
     form.setAttribute("method", "post");
