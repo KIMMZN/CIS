@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class AttendanceController {
 
@@ -16,12 +18,14 @@ public class AttendanceController {
     private IF_AttendanceService attendanceService;
 
     @GetMapping(value = "attendance")
-    public String attendance(Model model) {
+    public String attendance(Model model) throws Exception {
+        List<AttendanceDTO> attendance_list = attendanceService.attendanceList();
+        model.addAttribute("attendance_list", attendance_list);
         return "attendance/attendance";
     }
 
     @PostMapping(value = "go_to_work")
-    public String workStart(@ModelAttribute AttendanceDTO attendanceDTO, Model model) throws Exception {
+    public String workStart(@ModelAttribute AttendanceDTO attendanceDTO) throws Exception {
         attendanceService.workStart(attendanceDTO);
         return "redirect:attendance";
     }
