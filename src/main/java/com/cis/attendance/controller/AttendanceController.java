@@ -22,7 +22,7 @@ public class AttendanceController {
     @GetMapping(value = "attendance")
     public String attendance(@RequestParam(defaultValue = "1") int page, Model model) throws Exception {
         int totalListCnt = attendanceService.attendanceListCnt();
-        Pagination pagination = new Pagination(totalListCnt, page);
+        Pagination pagination = new Pagination(6, totalListCnt, page);
 
         int startIndex = pagination.getStartIndex();
         int pageSize = pagination.getPageSize();
