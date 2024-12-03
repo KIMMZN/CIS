@@ -219,3 +219,21 @@ footer{
     text-align: center;
     align-items: center;
 }
+
+section {
+    width: 98%;
+    height: 61%;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mail_container {
+    width: 97.3%;
+    height: 94%;
+    padding: 15px;
+}
+
