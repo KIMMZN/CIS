@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIS : 메일 보내기</title>
-    <link rel="stylesheet" href="/css/base.css"/>
-    <link rel="stylesheet" href="/css/email/mail_send.css"/>
+    <title>CIS : 자유게시판 글쓰기</title>
+    <link rel="stylesheet" href="/css/layout/base.css"/>
     <link rel="stylesheet" type="text/css" href="/css/board/write.css">
 </head>
 <body>
@@ -39,7 +38,7 @@
     <section>
         <div class="mail_container">
             <div id="write">
-                <form action="/board_write_one" method="get">
+                <form action="/board_write_one" method="post" enctype="multipart/form-data">
                     <div class="write_main"><span>자유게시판</span></div>
                     <input type="text" value="자유게시판" readonly hidden="true" name="category">
                     <div class="write_writer">
@@ -61,8 +60,7 @@
                     <div class="write_text">
                         <div class="write_text_name">
                             <label for="contextbox">글내용</label>
-                            <textarea id="contextbox" name="board_content">
-                </textarea>
+                            <textarea id="contextbox" name="board_content"></textarea>
                         </div>
 
                     </div>
@@ -87,6 +85,7 @@
             </div>
         </div>
     </section>
+    <footer th:replace="~{layout/footer::footer}"></footer>
 </div>
 </body>
 <script src="/js/board/write_gj.js"></script>
