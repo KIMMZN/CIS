@@ -12,7 +12,7 @@
         SELECT * FROM email WHERE mail_check=#{filter} ORDER BY mail_num DESC, create_at DESC LIMIT #{startIndex}, #{pageSize}
     </select>
     <select id="emailSelectOne" resultType="com.cis.email.dto.EmailDTO">
-        SELECT * FROM email WHERE mail_num=${email_num}
+        SELECT * FROM email WHERE mail_num=#{email_num}
     </select>
     <select id="emailSelectOrderOne" resultType="string">
         SELECT mail_num FROM email ORDER BY mail_num DESC LIMIT 1
@@ -40,5 +40,8 @@
     </select>
     <select id="emailFileFind" resultType="com.cis.email.dto.EmailFileDTO">
         SELECT * FROM email_file WHERE file_name=#{file_name}
+    </select>
+    <select id="findEmployeeId" resultType="string">
+        SELECT emp_id FROM employee WHERE emp_id=#{emp_id}
     </select>
 </mapper>
