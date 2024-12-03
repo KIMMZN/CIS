@@ -48,6 +48,23 @@
                     </tr>
                     </thead>
                     <tbody id="attendance_list">
+                    <tr th:each="attendance : ${attendance_list}">
+                        <!-- 날짜 -->
+                        <td th:text="${attendance.work_date}"></td>
+                        <!-- 출근시간 -->
+                        <td th:text="${attendance.work_start.substring(0, 5)}"></td>
+                        <!-- 퇴근시간, null값이면 '-'로 표기 -->
+                        <td th:if="${#strings.isEmpty(attendance.work_end)}">-</td>
+                        <td th:unless="${#strings.isEmpty(attendance.work_end)}" th:text="${attendance.work_end.substring(0, 5)}"></td>
+                        <!-- 총 근무시간, null값이면 '-'로 표기 -->
+                        <td th:if="${#strings.isEmpty(attendance.work_total)}">-</td>
+                        <td th:unless="${#strings.isEmpty(attendance.work_total)}" th:text="${attendance.work_total} + '분'"></td>
+                        <!-- 특이사항, null값이면 '-'로 표기 -->
+                        <td th:if="${#strings.isEmpty(attendance.significant)}">-</td>
+                        <td th:unless="${#strings.isEmpty(attendance.significant)}" th:text="${attendance.significant}"></td>
+                        <!-- 지각여부 (Y 또는 N) -->
+                        <td th:text="${attendance.late_check}"></td>
+                    </tr>
                     <!--
                         <tr>
                             <td>2024-11-22</td>
