@@ -79,13 +79,16 @@
                     <tfoot>
                     <tr class="paging">
                         <td colspan="6">
-                            <a href="" style="font-weight: bold;">이전</a>
-                            <a href="">1</a>
-                            <a href="">2</a>
-                            <a href="">3</a>
-                            <a href="">4</a>
-                            <a href="">5</a>
-                            <a href="" style="font-weight: bold;">다음</a>
+                            <a th:href="@{attendance(page=1)}" style="font-weight: bold;"><div>처음</div></a>
+                            <a th:href="@{attendance(page=${pagination.prevBlock})}" style="font-weight: bold;"><div>이전</div></a>
+                            <th:block th:with="start=${pagination.startPage}, end=${pagination.endPage}">
+                                <a th:each="pageButton : ${#numbers.sequence(start, end)}" th:href="@{attendance(page=${pageButton})}">
+                                    <div th:if="${pagination.selectPage == pageButton}" th:text="${pageButton}" style="color: skyblue; font-weight: bold;"></div>
+                                    <div th:unless="${pagination.selectPage == pageButton}" th:text="${pageButton}"></div>
+                                </a>
+                            </th:block>
+                            <a th:href="@{attendance(page=${pagination.nextBlock})}" style="font-weight: bold;"><div>다음</div></a>
+                            <a th:href="@{attendance(page=${pagination.totalPageCnt})}" style="font-weight: bold;"><div>끝</div></a>
                         </td>
                     </tr>
                     </tfoot>
