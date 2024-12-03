@@ -4,13 +4,13 @@
 <mapper namespace="com.cis.email.repository.IF_EmailRepository">
     <insert id="emailInsert" parameterType="com.cis.email.dto.EmailDTO">
         INSERT INTO email
-        VALUES ((SELECT nextval('email_seq') FROM DUAL),
-            #{mail_title},
-            #{mail_content},
-            DEFAULT,
-            DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i'),
-            #{recipient_id},
-            'test2')
+            VALUES ((SELECT nextval('email_seq') FROM DUAL),
+                #{mail_title},
+                #{mail_content},
+                DEFAULT,
+                DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i'),
+                #{recipient_id},
+                'test2')
     </insert>
     <select id="emailSelectAll" resultType="com.cis.email.dto.EmailDTO">
         SELECT * FROM email AS m INNER JOIN employee AS e
@@ -54,13 +54,13 @@
     </delete>
     <insert id="emailFileInsert" parameterType="list">
         INSERT INTO email_file
-        VALUES <foreach item="file" collection="list" separator=",">
-            (#{file.mail_num},
-            #{file.file_name},
-            #{file.file_originname},
-            #{file.file_size},
-            DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i'))
-        </foreach>
+            VALUES <foreach item="file" collection="list" separator=",">
+                (#{file.mail_num},
+                #{file.file_name},
+                #{file.file_originname},
+                #{file.file_size},
+                DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i'))
+            </foreach>
     </insert>
     <select id="emailNumFind" parameterType="string" resultType="com.cis.email.dto.EmailFileDTO">
         SELECT * FROM email_file AS f INNER JOIN email AS m

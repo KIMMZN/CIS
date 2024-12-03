@@ -47,4 +47,5 @@ public class AttendanceController {
         attendanceService.attendanceMod(attendanceDTO);
         return "redirect:attendance";
     }
+
 }
