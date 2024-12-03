@@ -6,6 +6,9 @@
         INSERT INTO attendance VALUES ('test1', DATE_FORMAT(NOW(), '%H:%i'), NULL, DATE_FORMAT(NOW(), '%Y-%m-%d'), NULL, NULL, #{late_check})
     </insert>
     <select id="attendanceSelectAll" resultType="com.cis.attendance.dto.AttendanceDTO">
-        SELECT * FROM attendance ORDER BY work_date DESC
+        SELECT * FROM attendance ORDER BY work_date DESC LIMIT #{startIndex}, #{pageSize}
+    </select>
+    <select id="attendanceSelectAllCnt" resultType="int">
+        SELECT COUNT(*) FROM attendance
     </select>
 </mapper>
