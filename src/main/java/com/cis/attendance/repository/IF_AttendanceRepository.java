@@ -11,5 +11,6 @@ import java.util.List;
 public interface IF_AttendanceRepository {
     public void attendanceInsert(AttendanceDTO attendanceDTO) throws Exception;
     public List<AttendanceDTO> attendanceSelectAll(int startIndex, int pageSize) throws Exception;
+    public void attendanceUpdate(AttendanceDTO attendanceDTO);
     public int attendanceSelectAllCnt() throws Exception;
 }
