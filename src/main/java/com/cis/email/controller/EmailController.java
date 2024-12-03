@@ -4,7 +4,6 @@ import com.cis.FileUtils;
 import com.cis.Pagination;
 import com.cis.email.dto.EmailDTO;
 import com.cis.email.dto.EmailFileDTO;
-import com.cis.email.service.EmailService;
 import com.cis.email.service.IF_EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,6 +68,9 @@ public class EmailController {
     @GetMapping(value = "email_detail")
     public String mailDetail(@RequestParam("num") String email_num, Model model) throws Exception {
         EmailDTO email_one = emailservice.emailOne(email_num);
+        List<EmailFileDTO> email_files = emailservice.emailNumFind(email_num);
+        if (email_one.getMail_check().equals("N")) emailservice.emailCheckUpdate(email_num);
+        model.addAttribute("email_files", email_files);
         model.addAttribute("email_one", email_one);
         return "email/mail_detail";
     }
