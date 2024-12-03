@@ -8,10 +8,7 @@ import com.cis.email.service.IF_EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -63,6 +60,15 @@ public class EmailController {
         List<EmailFileDTO> email_files = fileUtils.uploadFiles(emaildto.getMail_files());
         emailservice.emailFileUpload(mail_num, email_files);
         return "redirect:email";
+    }
+
+    @PostMapping(value = "recipient_id/check")
+    @ResponseBody
+    public int recipientIdCheck(@RequestParam("recipient_id") String recipient_id) throws Exception {
+        // 아이디가 있을 경우(0)
+        if (recipient_id.equals(emailservice.recipientIdCheck(recipient_id))) return 0;
+        // 아이디가 없을 경우(1)
+        return 1;
     }
 
     @GetMapping(value = "email_detail")
