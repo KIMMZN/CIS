@@ -5,4 +5,7 @@
     <insert id="attendanceInsert" parameterType="com.cis.attendance.dto.AttendanceDTO">
         INSERT INTO attendance VALUES ('test1', DATE_FORMAT(NOW(), '%H:%i'), NULL, DATE_FORMAT(NOW(), '%Y-%m-%d'), NULL, NULL, #{late_check})
     </insert>
+    <select id="attendanceSelectAll" resultType="com.cis.attendance.dto.AttendanceDTO">
+        SELECT * FROM attendance ORDER BY work_date DESC
+    </select>
 </mapper>
