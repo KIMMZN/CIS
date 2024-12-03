@@ -43,6 +43,7 @@ public class AttendanceController {
 
     @PostMapping(value = "leave_work")
     public String workEnd(@ModelAttribute AttendanceDTO attendanceDTO) throws Exception {
+        if (attendanceDTO.getSignificant().equals("퇴근")) attendanceDTO.setSignificant(null);
         attendanceService.attendanceMod(attendanceDTO);
         return "redirect:attendance";
     }
