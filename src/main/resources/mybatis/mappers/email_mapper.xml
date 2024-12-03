@@ -23,6 +23,9 @@
     <select id="emailSelectCheckAllCnt" resultType="int">
         SELECT COUNT(*) FROM email WHERE mail_check=#{filter}
     </select>
+    <update id="emailUpdate" parameterType="string">
+        UPDATE email SET mail_check='Y' WHERE mail_num=#{email_num}
+    </update>
     <delete id="emailDelete" parameterType="string">
         DELETE FROM email WHERE mail_num=#{email_num}
     </delete>
