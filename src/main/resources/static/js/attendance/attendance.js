@@ -24,22 +24,32 @@ window.onload = () => {
     }
 }
 
-
-
 work_start.addEventListener("click", () => {
     work_start.style.display = "none"
     work_end.style.display = ""
 
     const form = document.createElement("form");
     form.setAttribute("method", "post");
-    form.setAttribute("action", "work_start");
+    form.setAttribute("action", "go_to_work");
 
     // const input = document.createElement("input");
     // input.setAttribute("type", "hidden");
     // input.setAttribute("name", "emp_id");
-    // input.setAttribute("value", 유저아이디)
-    // form.appendChild(input);
+    // input.setAttribute("value", emp_id)
 
+    let hour = today.getHours();
+    let minute = today.getMinutes();
+    let late_check = "N";
+
+    if (hour >= 9 && (hour > 9 || minute > 30)) late_check = "Y";
+
+    const late_check_input = document.createElement("input");
+    late_check_input.setAttribute("type", "hidden");
+    late_check_input.setAttribute("name", "late_check");
+    late_check_input.setAttribute("value", late_check);
+
+    // form.appendChild(input);
+    form.appendChild(late_check_input);
     document.body.appendChild(form);
     form.submit();
 });
@@ -47,4 +57,7 @@ work_start.addEventListener("click", () => {
 work_end.addEventListener("click", () => {
     console.log(now_date);
 
+    const form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "leave_work");
 });
