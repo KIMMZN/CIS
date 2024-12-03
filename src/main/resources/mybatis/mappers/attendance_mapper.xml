@@ -4,7 +4,7 @@
 <mapper namespace="com.cis.attendance.repository.IF_AttendanceRepository">
     <insert id="attendanceInsert" parameterType="com.cis.attendance.dto.AttendanceDTO">
         INSERT INTO attendance
-            VALUES ('test1',
+            VALUES ('test2',
                 DATE_FORMAT(NOW(), '%H:%i'),
                 NULL,
                 DATE_FORMAT(NOW(), '%Y-%m-%d'),
