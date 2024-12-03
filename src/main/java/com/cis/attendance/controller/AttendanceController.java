@@ -40,4 +40,10 @@ public class AttendanceController {
         attendanceService.workStart(attendanceDTO);
         return "redirect:attendance";
     }
+
+    @PostMapping(value = "leave_work")
+    public String workEnd(@ModelAttribute AttendanceDTO attendanceDTO) throws Exception {
+        attendanceService.attendanceMod(attendanceDTO);
+        return "redirect:attendance";
+    }
 }
