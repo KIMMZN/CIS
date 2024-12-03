@@ -23,35 +23,39 @@ window.onload = () => {
         attendance_empty.style.display = "none";
     }
 
-    if (attendance_row.rows[0].cells[0].innerText === now_date) {
-        if (!(attendance_row.rows[0].cells[2].innerText === "-")) {
+    if (attendance_row.rows.length > 0) {
+        if (attendance_row.rows[0].cells[0].innerText === now_date) {
+            if (!(attendance_row.rows[0].cells[2].innerText === "-")) {
+                work_end.style.display = "none";
+
+                const text = document.createElement("p");
+                text.style.fontSize = "40px";
+                text.style.fontWeight = "bold";
+                text.innerText = "수고하셨습니다.";
+
+                commute_container.appendChild(text);
+
+                const significant_select_box = document.getElementById("significant");
+                const significant_btn = document.getElementsByClassName("significant_btn")[0];
+
+                significant_select_box.disabled = "disabled";
+                significant_btn.disabled = "disabled";
+                significant_btn.style.display = "none";
+            }
+            work_start.style.display = "none";
+        } else {
             work_end.style.display = "none";
-
-            const text = document.createElement("p");
-            text.style.fontSize = "40px";
-            text.style.fontWeight = "bold";
-            text.innerText = "수고하셨습니다.";
-
-            commute_container.appendChild(text);
-
-            const significant_select_box = document.getElementById("significant");
-            const significant_btn = document.getElementsByClassName("significant_btn")[0];
-
-            significant_select_box.disabled = "disabled";
-            significant_btn.disabled = "disabled";
-            significant_btn.style.display = "none";
         }
-        work_start.style.display = "none";
-    } else {
-        work_end.style.display = "none";
     }
 }
 
 work_start.addEventListener("click", () => {
-    let check_date = attendance_row.rows[0].cells[0].innerText;
-    if (check_date === now_date) {
-        alert("이미 출근 처리 되었습니다.\n출근 내역을 확인해주세요.");
-        return;
+    if (attendance_row.rows.length > 0) {
+        let check_date = attendance_row.rows[0].cells[0].innerText;
+        if (check_date === now_date) {
+            alert("이미 출근 처리 되었습니다.\n출근 내역을 확인해주세요.");
+            return;
+        }
     }
 
     work_start.style.display = "none";
@@ -127,14 +131,19 @@ function leaveWork(significant_value) {
 }
 
 function work_end_check() {
-    let check_date = attendance_row.rows[0].cells[0].innerText;
-    let check_end_time = attendance_row.rows[0].cells[2].innerText;
-    if (!(check_date === now_date)) {
+    if (attendance_row.rows.length > 0) {
+        let check_date = attendance_row.rows[0].cells[0].innerText;
+        let check_end_time = attendance_row.rows[0].cells[2].innerText;
+        if (!(check_date === now_date)) {
+            alert("금일 출근 내역이 존재하지 않습니다.");
+            return check_val = true;
+        }
+        if (check_date === now_date && !(check_end_time === "-")) {
+            alert("이미 퇴근 처리 되었습니다.\n퇴근 내역을 확인해주세요.");
+            return check_val = true;
+        }
+    } else {
         alert("금일 출근 내역이 존재하지 않습니다.");
-        return check_val = true;
-    }
-    if (check_date === now_date && !(check_end_time === "-")) {
-        alert("이미 퇴근 처리 되었습니다.\n퇴근 내역을 확인해주세요.");
         return check_val = true;
     }
 }
