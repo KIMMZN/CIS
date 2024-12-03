@@ -17,13 +17,15 @@
             </div>
             <div class="profile_info">
                 <div>
-                    <span class="my_name">이름</span> / <span class="my_id">아이디</span>
+                    <!-- 원진호_1203 thymeleaf th:text 추가 -->
+                    <span class="my_name">이름</span> / <span class="my_id" th:text="|${session.emp_name} 님|"></span>
                 </div>
                 <div>
-                    <span class="my_dept">부서</span> / <span class="my_rank">직급</span>
+                    <span class="my_dept" th:text="${session.emp_dept}"></span> / <span class="my_rank" th:text="${session.emp_rank}"></span>
                 </div>
                 <div>
-                    <span class="my_tel">전화번호 : 010-0000-0000</span>
+                    <span class="my_email" th:text="|이메일 : ${session.emp_email}|"></span>
+                    <!-- 추가끝 -->
                 </div>
             </div>
             <div class="profile_btn">
