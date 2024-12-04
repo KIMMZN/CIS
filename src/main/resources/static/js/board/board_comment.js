@@ -167,10 +167,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
         cancel.setAttribute("value", "취소");
         inputbtnDiv.append(cancel);
         alert("취소버튼생성")
-
-        document.querySelector(`button[data]`)
-
-
+        //
+        // document.querySelector(`button[]`)
+        //
+        //
 
 
 
