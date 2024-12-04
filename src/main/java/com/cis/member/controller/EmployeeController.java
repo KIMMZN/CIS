@@ -1,8 +1,7 @@
 package com.cis.member.controller;
 
 import com.cis.Pagination;
-import com.cis.member.dto.EmployeeDTO;
-import com.cis.member.dto.ManagerEmployeeDTO;
+import com.cis.member.dto.*;
 import com.cis.member.service.IF_MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +21,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-     IF_MemberService memberService;
+    IF_MemberService memberService;
 
     // 시작화면 (로그인 방식 선택.)
     @GetMapping(value="/")
@@ -51,7 +50,7 @@ public class EmployeeController {
 //        }
 //    }
 
-
+    // 일반사원 로그인.
     @RequestMapping(value="employee_login_action")
     public String employee_login_action(HttpServletRequest request) throws Exception {
         String userId = request.getParameter("emp_id");
@@ -129,7 +128,7 @@ public class EmployeeController {
         }
     }
 
-//    public String manage_page(Model model, @ModelAttribute PageDTO pagedto) throws Exception{
+    //    public String manage_page(Model model, @ModelAttribute PageDTO pagedto) throws Exception{
     @GetMapping(value="manager_page")
     public String manage_page(@RequestParam(defaultValue = "1") int page, Model model) throws Exception{
         int totalCount = memberService.total_count_number();
@@ -152,7 +151,7 @@ public class EmployeeController {
 
 
 
-//     전체 사원 리스트에서 사원이름으로 검색한 결과.
+    //     전체 사원 리스트에서 사원이름으로 검색한 결과.
 //    @PostMapping(value="search_part")
     @PostMapping(value="manager_page")
 //    public String search(@RequestParam("search_employee") String input_name, Model model) throws Exception{
@@ -179,7 +178,7 @@ public class EmployeeController {
 //                System.out.println(big_part);
 //                System.out.println(department);
                 // 부서 선택.
-               list = memberService.total_dept_list( department, startIndex, pageSize);
+                list = memberService.total_dept_list( department, startIndex, pageSize);
                 System.out.println(list.size());
                 for(ManagerEmployeeDTO member : list){
                     System.out.println("부서 선택한 사원 정보 : " + member.toString());
@@ -206,12 +205,12 @@ public class EmployeeController {
     }
 
 
-        // 부서 선택.
+    // 부서 선택.
 //        List<ManagerEmployeeDTO> dept_list = memberService.total_dept_list(big_part, department);
 //        // 재직상태 선택.
 //        List<ManagerEmployeeDTO> work_status_list = memberService.total_work_status_list(big_part, work_status);
 
-        // 이름으로 검색.
+    // 이름으로 검색.
 //        List<ManagerEmployeeDTO> list = memberService.total_search_employee_list(input_name);
 //        for(ManagerEmployeeDTO member : list){
 //            System.out.println("검색한 사원 정보 : " + member.toString());
@@ -242,7 +241,7 @@ public class EmployeeController {
 //    @PostMapping(value="send_modify_employee_info")
 //    public String change_info(@RequestParam("emp_name") String name) throws Exception{
 //        System.out.println("MemberController 에서 값 확인 : " + name);
-////        System.out.println("MemberController 도착 확인.");
+    ////        System.out.println("MemberController 도착 확인.");
 //        return "redirect:manager_page";
 //    }
 
@@ -261,7 +260,8 @@ public class EmployeeController {
     }
 
     // 관리자 직원 정보 추가가 필요한 사원에 리스트 조회.
-    @GetMapping(value="complete_employee_info")
+//    @GetMapping(value="complete_employee_info")
+    @GetMapping(value="manager_page")
     public String complete_employee_info(@RequestParam(defaultValue = "1") int page, Model model) throws Exception{
         int totalCount = memberService.total_count_number();
         System.out.println("totalcount : " + totalCount + " / " + page);
