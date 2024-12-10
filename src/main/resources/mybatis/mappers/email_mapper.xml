@@ -95,4 +95,8 @@
         SELECT e.emp_id FROM employee AS e
         WHERE e.emp_id=#{emp_id}
     </select>
+    <select id="findEmployeeName" resultType="string">
+        SELECT m.emp_name FROM manager AS m INNER JOIN employee AS e
+                                                       ON m.resident_num=e.resident_num AND e.emp_id=#{emp_id}
+    </select>
 </mapper>
