@@ -11,32 +11,8 @@
 </head>
 <body>
 <div class="main">
-  <header>
-    <div class="header_left">
-      <a href="emp_main">
-        <img src="/img/logo.png" alt="Logo" class="logo_img">
-        <div>
-          <span class="logo_text">○○○ Company</span>
-        </div>
-      </a>
-    </div>
-    <div class="header_right">
-      <div>
-        <span class="login_user">○○○ 님</span>
-      </div>
-      <form action="" method="">
-        <input type="button" value="로그아웃" class="logout_btn">
-      </form>
-    </div>
-  </header>
-  <nav>
-    <ul>
-      <li><a href="email"><span>이메일</span></a></li>
-      <li><a href=""><span>게시판</span></a></li>
-      <li><a href=""><span>근태관리</span></a></li>
-      <li><a href=""><span>개인업무</span></a></li>
-    </ul>
-  </nav>
+  <header th:replace="~{layout/header::header}"></header>
+  <nav th:replace="~{layout/nav::nav}"></nav>
   <section>
     <div class="mail_container">
       <div class="mail_btn">
@@ -78,6 +54,7 @@
 
       <div class="mail_list">
         <table class="mail_table">
+          <thead>
           <tr>
             <th>번호</th>
             <th class="th2">제목</th>
@@ -85,12 +62,14 @@
             <th>조회수</th>
             <th>등록일자</th>
           </tr>
+          </thead>
           <tr th:each="m: ${boardvolist.list}" th:if="${boardvolist.list != null}">
             <td th:text="${m.board_num}"></td>
             <td>
               <a th:href="@{/fr_preview/{board_num}(board_num=${m.board_num})}" th:text="${m.board_title}"></a>
             </td>
             <td th:text="${m.emp_id}"></td>
+<!--            <td th:text="${emp_name}"></td>-->
             <td th:text="${m.boardHits}"></td>
             <td th:text="${m.getCreate_at()}"></td>
           </tr>
@@ -129,7 +108,7 @@
 
       <div id="table_write_div">
         <a href="/write_fr">
-          <button class="write_button" type="button">글쓰기 </button>
+          <button class="write_button" type="button"><i class="fa-solid fa-pen">글쓰기</i></button>
         </a>
       </div>
 

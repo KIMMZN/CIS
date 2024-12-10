@@ -14,8 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 public interface IF_board_service {
+
+
     //게시글 작성
 //   public void writeOne(boardVO boardvo)throws Exception;
+    //게시글에 작성된 id를 보내고 name을 리턴받음
+    public String getNameById(String emp_id) throws Exception;
     //게시글작성 // 파일첨부 포함
     public void writeOneF(boardVO boardvo, List<fileVO> fileList)throws Exception;
     //
@@ -38,11 +42,16 @@ public interface IF_board_service {
     public void modOne(boardVO boardvo)throws Exception;
     //자유게시판 게시글 수정시 파일삭제
     public void fileDel(List<String> delids, String categoryTemp)throws Exception;
+    //관리자 게시판에서 글삭제시 파일삭제
+//    ifboardservice.delfilesBybdNumCategory(params);
+    public void delfilesBybdNumCategory(Map<String,Object> params) throws Exception;
     // 공지사항 게시글 리스트 조회 // param - searchDTO // return- 게시글 리스트(boardVO)
     public PagingResponse<boardVO> findAllPost(searchDTO params)throws Exception;
 
     // 자유게시판 게시글 리스트 조회 // param - searchDTO // return- 게시글 리스트(boardVO)
     public PagingResponse<boardVO> findAllPost_fr(searchDTO params)throws Exception;
+    //모든 게시글 보기
+    public PagingResponse<boardVO> findAllPost_adm(searchDTO params)throws Exception;
 
     //자유 게시판 파일 수정(추가)
     public void modfile(List<fileVO> filevoList)throws Exception;
@@ -50,7 +59,7 @@ public interface IF_board_service {
     //댓글 글쓰기;
     public boolean addCommentOne(commentVO commentvo)throws Exception;
     //댓글 가져오기;
-   //List<commentVO> returunList = ifboardservice.(params);
+    //List<commentVO> returunList = ifboardservice.(params);
     public List<commentVO> viewComment(Map<String, Object> params )throws Exception;
 
     boolean deleteCommentByCategoryAndId(Map<String, Object> params) throws Exception;
