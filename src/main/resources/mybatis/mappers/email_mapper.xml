@@ -38,7 +38,8 @@
     </select>
     <select id="emailSelectOrderOne" resultType="string">
         SELECT m.mail_num FROM email AS m INNER JOIN employee AS e
-                                                     ON m.recipient_id=e.emp_id AND m.recipient_id=#{login_emp}
+                                                     ON m.recipient_id=e.emp_id
+                                                         AND (m.recipient_id=#{recipient_id} OR m.sender_id=#{sender_id})
         ORDER BY m.mail_num DESC LIMIT 1
     </select>
     <select id="emailSelectAllCnt" resultType="int">
