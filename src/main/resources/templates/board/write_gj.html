@@ -6,35 +6,12 @@
     <title>CIS : 공지사항 글쓰기</title>
     <link rel="stylesheet" href="/css/layout/base.css"/>
     <link rel="stylesheet" type="text/css" href="/css/board/write.css">
+    <script src="https://kit.fontawesome.com/ae15ba340d.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="main">
-    <header>
-        <div class="header_left">
-            <a href="emp_main">
-                <img src="/img/logo.png" alt="Logo" class="logo_img">
-                <div>
-                    <span class="logo_text">○○○ Company</span>
-                </div>
-            </a>
-        </div>
-        <div class="header_right">
-            <div>
-                <span class="login_user">○○○ 님</span>
-            </div>
-            <form action="" method="">
-                <input type="button" value="로그아웃" class="logout_btn">
-            </form>
-        </div>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="email"><span>이메일</span></a></li>
-            <li><a href=""><span>게시판</span></a></li>
-            <li><a href=""><span>근태관리</span></a></li>
-            <li><a href=""><span>개인업무</span></a></li>
-        </ul>
-    </nav>
+    <header th:replace="~{layout/header::header}"></header>
+    <nav th:replace="~{layout/nav::nav}"></nav>
     <section>
         <div class="mail_container">
             <div id="write">
@@ -45,24 +22,28 @@
 
 
                         <div class="write_writer_name" ${model}>
-                            <label for="namebox">작성자</label>
+                            <label for="namebox1">작성자</label>
 <!--                            model.addAttribute("userName", name);-->
-                            <input type="text" id="namebox" name="emp_id"
+                            <input type="text" id="namebox1" name="emp_name"
                             th:value="${userName}" readonly>
+                            <label for="namebox" hidden="hidden">작성자</label>
+                            <!--model.addAttribute("userName", name);-->
+                            <input type="text" id="namebox" name="emp_id"
+                                   th:value="${emp_id}" readonly hidden="hidden">
                         </div>
 
                     </div>
                     <div class="write_title">
                         <div class="write_title_name">
                             <label for="titlebox">제목</label>
-                            <input type="text" id="titlebox" placeholder="제목을 입력하시오" name="board_title">
+                            <input type="text" id="titlebox" placeholder="제목을 입력하시오" name="board_title" required>
                         </div>
 
                     </div>
                     <div class="write_text">
                         <div class="write_text_name">
                             <label for="contextbox">글내용</label>
-                            <textarea id="contextbox" name="board_content"></textarea>
+                            <textarea id="contextbox" name="board_content" required></textarea>
                         </div>
 
                     </div>
@@ -74,7 +55,10 @@
 
                     <div class="write_button">
                         <div class="fileadd_div">
-                            <input class="write_add_btn" type="submit" value="등록">
+                            <button class="write_add_btn" type="submit">
+                                <i class="fa-solid fa-pencil">등록</i>
+                            </button>
+<!--                            <input class="write_add_btn" type="submit" value="등록">-->
                         </div>
                     </div>
                 </form>
