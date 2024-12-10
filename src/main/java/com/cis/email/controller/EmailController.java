@@ -68,7 +68,7 @@ public class EmailController {
         emaildto.setSender_id((String)login_emp);
         emailservice.emailInsert(emaildto);
 
-        String mail_num = emailservice.emailOrderOne(login_emp);
+        String mail_num = emailservice.emailOrderOne(emaildto);
         List<EmailFileDTO> email_files = emailFileUtils.uploadFiles(emaildto.getMail_files());
         emailservice.emailFileUpload(mail_num, email_files);
         return "redirect:email";
