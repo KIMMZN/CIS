@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface IF_EmailRepository {
+
     public void emailInsert(EmailDTO emailDTO) throws Exception;
     public List<EmailDTO> emailSelectAll(Object login_emp, Pagination pagination, String mail_check) throws Exception;
     public EmailDTO emailSelectOne(Object login_emp, String email_num) throws Exception;
@@ -24,4 +25,5 @@ public interface IF_EmailRepository {
     public EmailFileDTO emailFileFind(String file_name) throws Exception;
     public String findEmployeeId(String emp_id) throws Exception;
     public String findEmployeeName(String emp_id) throws Exception;
+
 }
