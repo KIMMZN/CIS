@@ -26,6 +26,7 @@ public class EmailService implements IF_EmailService {
         return switch (filter) {
             case "unread" -> emailrepository.emailSelectCheckAll(login_emp, startIndex, pageSize, "N");
             case "read" -> emailrepository.emailSelectCheckAll(login_emp, startIndex, pageSize, "Y");
+            case "send" -> emailrepository.emailSelectMyAll(login_emp, startIndex, pageSize);
             default -> emailrepository.emailSelectAll(login_emp, startIndex, pageSize);
         };
     }
@@ -45,6 +46,7 @@ public class EmailService implements IF_EmailService {
         return switch (filter) {
             case "unread" -> emailrepository.emailSelectCheckAllCnt(login_emp, "N");
             case "read" -> emailrepository.emailSelectCheckAllCnt(login_emp, "Y");
+            case "send" -> emailrepository.emailSelectMyAllCnt(login_emp);
             default -> emailrepository.emailSelectAllCnt(login_emp);
         };
     }
