@@ -1,5 +1,6 @@
 package com.cis.main.controller;
 
+import com.cis.Pagination;
 import com.cis.attendance.dto.AttendanceDTO;
 import com.cis.attendance.service.IF_AttendanceService;
 import jakarta.servlet.http.HttpSession;
@@ -16,16 +17,25 @@ public class MainController {
     @Autowired
     private IF_AttendanceService attendanceService;
 
+    // 게시판, 근태관리, 개인업무 목록 조회, 직원 메인화면 페이지 이동
     @GetMapping(value = "emp_main")
-    public String empMain(Model model, HttpSession httpSession) throws Exception {
+    public String empMain(Model model,
+                          HttpSession httpSession) throws Exception {
         Object login_emp = httpSession.getAttribute("employee_id");
         if (login_emp == null) return "total_login";
 
-        List<AttendanceDTO> attendance_list = attendanceService.attendanceList(login_emp, 0, 3);
+        Pagination pagination = new Pagination(6, 3, 1);
+        pagination.setStartIndex(0);
+        pagination.setPageSize(3);
+
+        List<AttendanceDTO> attendance_list = attendanceService.attendanceList(login_emp, pagination);
+
         model.addAttribute("attendance_list", attendance_list);
+
         return "main/emp_main";
     }
 
+    // 관리자 메인화면 페이지 이동
     @GetMapping(value = "manager_main")
     public String managerMain() {
         return "main/manager_main";
