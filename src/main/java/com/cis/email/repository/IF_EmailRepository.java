@@ -11,14 +11,14 @@ import java.util.List;
 @Mapper
 public interface IF_EmailRepository {
     public void emailInsert(EmailDTO emailDTO) throws Exception;
-    public List<EmailDTO> emailSelectAll(int startIndex, int pageSize) throws Exception;
-    public List<EmailDTO> emailSelectCheckAll(int startIndex, int pageSize, String filter) throws Exception;
-    public EmailDTO emailSelectOne(String email_num) throws Exception;
-    public String emailSelectOrderOne() throws Exception;
-    public int emailSelectAllCnt() throws Exception;
-    public int emailSelectCheckAllCnt(String filter) throws Exception;
-    public void emailUpdate(String email_num);
-    public void emailDelete(String email_num) throws Exception;
+    public List<EmailDTO> emailSelectAll(Object login_emp, int startIndex, int pageSize) throws Exception;
+    public List<EmailDTO> emailSelectCheckAll(Object login_emp, int startIndex, int pageSize, String filter) throws Exception;
+    public EmailDTO emailSelectOne(Object login_emp, String email_num) throws Exception;
+    public String emailSelectOrderOne(Object login_emp) throws Exception;
+    public int emailSelectAllCnt(Object login_emp) throws Exception;
+    public int emailSelectCheckAllCnt(Object login_emp, String filter) throws Exception;
+    public void emailUpdate(Object login_emp, String email_num);
+    public void emailDelete(Object login_emp, String email_num) throws Exception;
     public void emailFileInsert(List<EmailFileDTO> email_files) throws Exception;
     public List<EmailFileDTO> emailNumFind(String mail_num) throws Exception;
     public List<EmailFileDTO> emailFileNameFind(List<String> file_name) throws Exception;
