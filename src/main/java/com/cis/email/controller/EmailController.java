@@ -83,6 +83,12 @@ public class EmailController {
         return 1;
     }
 
+    @PostMapping(value = "recipient_id/name/check")
+    @ResponseBody
+    public String recipientIdNameCheck(@RequestParam("recipient_id") String recipient_id) throws Exception {
+        return emailservice.recipientIdNameCheck(recipient_id);
+    }
+
     @GetMapping(value = "email_detail")
     public String mailDetail(@RequestParam("num") String email_num, Model model, HttpSession httpSession) throws Exception {
         Object login_emp = httpSession.getAttribute("employee_id");
