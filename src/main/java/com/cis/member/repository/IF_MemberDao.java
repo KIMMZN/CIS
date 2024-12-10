@@ -5,6 +5,7 @@ import com.cis.member.dto.ManagerDTO;
 import com.cis.member.dto.ManagerEmployeeDTO;
 import com.cis.member.dto.PageDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -86,6 +87,12 @@ public interface IF_MemberDao {
 
     public int count_employee_need_complete() throws Exception;
 
+    // 부서, 직급, 이름으로 사원 정보 조회 -- JISOO
+    ManagerEmployeeDTO findEmployeeByDeptRankName(@Param("emp_dept") String emp_dept,
+                                                  @Param("emp_rank") String emp_rank,
+                                                  @Param("emp_name") String emp_name) throws Exception;
 
+    // emp_id로 직원 정보 조회 -- JISOO
+    ManagerEmployeeDTO findEmployeeById(@Param("emp_id") String emp_id) throws Exception;
 
 }

@@ -47,6 +47,8 @@ dependencies {
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.3'
 	// Validation 라이브러리 추가_원진호_1206 추가
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// 페이지헬퍼 추가 - 심지수
+	implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
 }
 
 tasks.named('test') {
