@@ -32,7 +32,9 @@
     </select>
     <select id="emailSelectOne" resultType="EmailDTO">
         SELECT * FROM email AS m INNER JOIN employee AS e
-                                            ON m.recipient_id=e.emp_id AND m.recipient_id=#{login_emp} AND m.mail_num=#{email_num}
+                                            ON m.recipient_id=e.emp_id
+                                                AND (m.recipient_id=#{login_emp} OR m.sender_id=#{login_emp})
+                                                AND m.mail_num=#{email_num}
     </select>
     <select id="emailSelectOrderOne" resultType="string">
         SELECT m.mail_num FROM email AS m INNER JOIN employee AS e
