@@ -18,6 +18,12 @@
         ORDER BY m.mail_num DESC, m.create_at DESC
         LIMIT #{startIndex}, #{pageSize}
     </select>
+    <select id="emailSelectMyAll" resultType="EmailDTO">
+        SELECT * FROM email AS m INNER JOIN employee AS e
+                                            ON m.sender_id=e.emp_id AND m.sender_id=#{login_emp}
+        ORDER BY m.mail_num DESC, m.create_at DESC
+        LIMIT #{startIndex}, #{pageSize}
+    </select>
     <select id="emailSelectCheckAll" resultType="EmailDTO">
         SELECT * FROM email AS m INNER JOIN employee AS e
                                             ON m.recipient_id=e.emp_id AND m.recipient_id=#{login_emp} AND m.mail_check=#{filter}
@@ -36,6 +42,10 @@
     <select id="emailSelectAllCnt" resultType="int">
         SELECT COUNT(*) FROM email AS m INNER JOIN employee AS e
                                                    ON m.recipient_id=e.emp_id AND m.recipient_id=#{login_emp}
+    </select>
+    <select id="emailSelectMyAllCnt" resultType="int">
+        SELECT COUNT(*) FROM email AS m INNER JOIN employee AS e
+                                                   ON m.sender_id=e.emp_id AND m.sender_id=#{login_emp}
     </select>
     <select id="emailSelectCheckAllCnt" resultType="int">
         SELECT COUNT(*) FROM email AS m INNER JOIN employee AS e
