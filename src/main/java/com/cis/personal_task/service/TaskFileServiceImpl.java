@@ -21,7 +21,7 @@ public class TaskFileServiceImpl implements TaskFileService {
 
     private final TaskFileRepository taskFileRepository;
 
-    @Value("${file.upload-dir}")
+    //    @Value("")
     private String uploadDir;
 
     public TaskFileServiceImpl(TaskFileRepository taskFileRepository) {
