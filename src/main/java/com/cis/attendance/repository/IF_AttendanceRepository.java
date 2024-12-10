@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface IF_AttendanceRepository {
     public void attendanceInsert(AttendanceDTO attendanceDTO) throws Exception;
-    public List<AttendanceDTO> attendanceSelectAll(int startIndex, int pageSize) throws Exception;
+    public List<AttendanceDTO> attendanceSelectAll(Object login_emp, int startIndex, int pageSize) throws Exception;
     public void attendanceUpdate(AttendanceDTO attendanceDTO);
-    public int attendanceSelectAllCnt() throws Exception;
+    public int attendanceSelectAllCnt(Object login_emp) throws Exception;
 }
