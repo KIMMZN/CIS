@@ -1,12 +1,14 @@
 package com.cis.personal_task.repository;
 
 import com.cis.personal_task.dto.PersonalTaskDTO;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@Mapper
 public interface PersonalTaskRepository {
     // 업무 삽입
     void insertTask(PersonalTaskDTO taskDTO);
