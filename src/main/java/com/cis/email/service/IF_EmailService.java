@@ -9,7 +9,7 @@ public interface IF_EmailService {
     public void emailInsert(EmailDTO emailDTO) throws Exception;
     public List<EmailDTO> emailList(Object login_emp, int startIndex, int pageSize, String filter) throws Exception;
     public EmailDTO emailOne(Object login_emp, String email_num) throws Exception;
-    public String emailOrderOne(Object login_emp) throws Exception;
+    public String emailOrderOne(EmailDTO emaildto) throws Exception;
     public int emailListCnt(Object login_emp, String filter) throws Exception;
     public void emailCheckUpdate(Object login_emp, String email_num) throws Exception;
     public void emailDelete(Object login_emp, String email_num) throws Exception;
