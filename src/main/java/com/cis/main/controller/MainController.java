@@ -24,6 +24,12 @@ public class MainController {
         Object login_emp = httpSession.getAttribute("employee_id");
         if (login_emp == null) return "total_login";
 
+        // 메인화면 목록 리스트 출력하기
+        // 자유게시판
+
+        // 공지사항
+
+        // 근태관리
         Pagination pagination = new Pagination(6, 3, 1);
         pagination.setStartIndex(0);
         pagination.setPageSize(3);
@@ -31,6 +37,8 @@ public class MainController {
         List<AttendanceDTO> attendance_list = attendanceService.attendanceList(login_emp, pagination);
 
         model.addAttribute("attendance_list", attendance_list);
+        // 개인업무
+
 
         return "main/emp_main";
     }
