@@ -19,8 +19,8 @@ public class AttendanceService implements IF_AttendanceService {
     }
 
     @Override
-    public List<AttendanceDTO> attendanceList(int startIndex, int pageSize) throws Exception {
-        return attendanceRepository.attendanceSelectAll(startIndex, pageSize);
+    public List<AttendanceDTO> attendanceList(Object login_emp, int startIndex, int pageSize) throws Exception {
+        return attendanceRepository.attendanceSelectAll(login_emp, startIndex, pageSize);
     }
 
     @Override
@@ -29,8 +29,8 @@ public class AttendanceService implements IF_AttendanceService {
     }
 
     @Override
-    public int attendanceListCnt() throws Exception {
-        return attendanceRepository.attendanceSelectAllCnt();
+    public int attendanceListCnt(Object login_emp) throws Exception {
+        return attendanceRepository.attendanceSelectAllCnt(login_emp);
     }
 
 }
