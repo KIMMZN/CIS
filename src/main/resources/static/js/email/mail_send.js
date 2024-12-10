@@ -55,9 +55,40 @@ mail_title.addEventListener(("keyup"), () => {
 
 // 키를 뗀 경우의 이벤트, 받는 사람 아이디 12글자 제한, 정규식(공백,한글,대문자 제거)적용
 let recipient_id = document.getElementsByName("recipient_id")[0];
+let recipient_name_box = document.getElementsByClassName("mail_recipient_check_name")[0];
 recipient_id.addEventListener("keyup", () => {
     if (recipient_id.value.length > 12) recipient_id.value = recipient_id.value.substring(0, 12);
     recipient_id.value = recipient_id.value.replaceAll(/[\sㄱ-ㅎㅏ-ㅣ가-힣A-Z]/g, "");
+
+    let recipient_id_text = recipient_id.value;
+
+    $.ajax({
+        type : "POST",
+        url : "/recipient_id/name/check",
+        data : {
+            "recipient_id" : recipient_id_text
+        },
+        success : function(name) {
+            // 리턴받은 직원 이름이 없을 경우(null), null이면 아무것도 반환하지 않는다.
+            // 클라이언트 - 서버 통신 데이터는 String으로 이뤄지기에 null이면 ''을 반환받는다.
+            // 반환받은 name의 길이가 존재하지 않으면 null이고, 길이가 존재하면 직원 이름이다.
+            if (name.length <= 0) {
+                if (recipient_id.value.length <= 0) {
+                    recipient_name_box.style.color = "#666666"
+                    recipient_name_box.innerText = "받는 사람의 아이디를 입력해주세요.";
+                    return;
+                }
+                recipient_name_box.style.color = "red"
+                recipient_name_box.innerText = "해당 아이디를 가진 유저는 존재하지 않습니다."
+            } else {
+                recipient_name_box.style.color = "dodgerblue"
+                recipient_name_box.innerText = "받는 사람 : " + name;
+            }
+        },
+        error : function() {
+            alert("서버 요청 실패");
+        }
+    });
 });
 
 // 키를 뗀 경우의 이벤트, 내용 255글자 제한
@@ -102,5 +133,4 @@ send_btn.addEventListener("click", () => {
             alert("서버 요청 실패");
         }
     });
-    // email_send.submit();
 });
