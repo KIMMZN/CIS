@@ -1,5 +1,6 @@
 package com.cis.email.service;
 
+import com.cis.Pagination;
 import com.cis.email.dto.EmailDTO;
 import com.cis.email.dto.EmailFileDTO;
 import com.cis.email.repository.IF_EmailRepository;
@@ -7,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
 public class EmailService implements IF_EmailService {
 
     @Autowired
-    IF_EmailRepository emailrepository;
+    private IF_EmailRepository emailrepository;
 
     @Override
     public void emailInsert(EmailDTO emailDTO) throws Exception {
@@ -22,12 +22,11 @@ public class EmailService implements IF_EmailService {
     }
 
     @Override
-    public List<EmailDTO> emailList(Object login_emp, int startIndex, int pageSize, String filter) throws Exception {
-        return switch (filter) {
-            case "unread" -> emailrepository.emailSelectCheckAll(login_emp, startIndex, pageSize, "N");
-            case "read" -> emailrepository.emailSelectCheckAll(login_emp, startIndex, pageSize, "Y");
-            case "send" -> emailrepository.emailSelectMyAll(login_emp, startIndex, pageSize);
-            default -> emailrepository.emailSelectAll(login_emp, startIndex, pageSize);
+    public List<EmailDTO> emailList(Object login_emp, Pagination pagination) throws Exception {
+        return switch (pagination.getFilter()) {
+            case "unread" -> emailrepository.emailSelectAll(login_emp, pagination, "N");
+            case "read" -> emailrepository.emailSelectAll(login_emp, pagination, "Y");
+            default -> emailrepository.emailSelectAll(login_emp, pagination, null);
         };
     }
 
@@ -43,12 +42,7 @@ public class EmailService implements IF_EmailService {
 
     @Override
     public int emailListCnt(Object login_emp, String filter) throws Exception {
-        return switch (filter) {
-            case "unread" -> emailrepository.emailSelectCheckAllCnt(login_emp, "N");
-            case "read" -> emailrepository.emailSelectCheckAllCnt(login_emp, "Y");
-            case "send" -> emailrepository.emailSelectMyAllCnt(login_emp);
-            default -> emailrepository.emailSelectAllCnt(login_emp);
-        };
+        return emailrepository.emailSelectAllCnt(login_emp, filter);
     }
 
     @Override
@@ -73,12 +67,6 @@ public class EmailService implements IF_EmailService {
     @Override
     public List<EmailFileDTO> emailNumFind(String mail_num) throws Exception {
         return emailrepository.emailNumFind(mail_num);
-    }
-
-    @Override
-    public List<EmailFileDTO> emailFileNameFind(List<String> file_name) throws Exception {
-        if (CollectionUtils.isEmpty(file_name)) return Collections.emptyList();
-        return emailrepository.emailFileNameFind(file_name);
     }
 
     @Override
