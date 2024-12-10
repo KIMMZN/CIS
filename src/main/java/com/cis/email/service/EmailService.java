@@ -22,41 +22,41 @@ public class EmailService implements IF_EmailService {
     }
 
     @Override
-    public List<EmailDTO> emailList(int startIndex, int pageSize, String filter) throws Exception {
+    public List<EmailDTO> emailList(Object login_emp, int startIndex, int pageSize, String filter) throws Exception {
         return switch (filter) {
-            case "unread" -> emailrepository.emailSelectCheckAll(startIndex, pageSize, "N");
-            case "read" -> emailrepository.emailSelectCheckAll(startIndex, pageSize, "Y");
-            default -> emailrepository.emailSelectAll(startIndex, pageSize);
+            case "unread" -> emailrepository.emailSelectCheckAll(login_emp, startIndex, pageSize, "N");
+            case "read" -> emailrepository.emailSelectCheckAll(login_emp, startIndex, pageSize, "Y");
+            default -> emailrepository.emailSelectAll(login_emp, startIndex, pageSize);
         };
     }
 
     @Override
-    public EmailDTO emailOne(String email_num) throws Exception {
-        return emailrepository.emailSelectOne(email_num);
+    public EmailDTO emailOne(Object login_emp, String email_num) throws Exception {
+        return emailrepository.emailSelectOne(login_emp, email_num);
     }
 
     @Override
-    public String emailOrderOne() throws Exception {
-        return emailrepository.emailSelectOrderOne();
+    public String emailOrderOne(Object login_emp) throws Exception {
+        return emailrepository.emailSelectOrderOne(login_emp);
     }
 
     @Override
-    public int emailListCnt(String filter) throws Exception {
+    public int emailListCnt(Object login_emp, String filter) throws Exception {
         return switch (filter) {
-            case "unread" -> emailrepository.emailSelectCheckAllCnt("N");
-            case "read" -> emailrepository.emailSelectCheckAllCnt("Y");
-            default -> emailrepository.emailSelectAllCnt();
+            case "unread" -> emailrepository.emailSelectCheckAllCnt(login_emp, "N");
+            case "read" -> emailrepository.emailSelectCheckAllCnt(login_emp, "Y");
+            default -> emailrepository.emailSelectAllCnt(login_emp);
         };
     }
 
     @Override
-    public void emailCheckUpdate(String email_num) throws Exception {
-        emailrepository.emailUpdate(email_num);
+    public void emailCheckUpdate(Object login_emp, String email_num) throws Exception {
+        emailrepository.emailUpdate(login_emp, email_num);
     }
 
     @Override
-    public void emailDelete(String email_num) throws Exception {
-        emailrepository.emailDelete(email_num);
+    public void emailDelete(Object login_emp, String email_num) throws Exception {
+        emailrepository.emailDelete(login_emp, email_num);
     }
 
     @Override
