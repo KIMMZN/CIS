@@ -37,8 +37,8 @@ public class EmailService implements IF_EmailService {
     }
 
     @Override
-    public String emailOrderOne(Object login_emp) throws Exception {
-        return emailrepository.emailSelectOrderOne(login_emp);
+    public String emailOrderOne(EmailDTO emaildto) throws Exception {
+        return emailrepository.emailSelectOrderOne(emaildto);
     }
 
     @Override
