@@ -58,9 +58,11 @@ public class EmailService implements IF_EmailService {
     @Override
     public void emailFileUpload(final String mail_num, final List<EmailFileDTO> email_files) throws Exception {
         if (CollectionUtils.isEmpty(email_files)) return;
+
         for (EmailFileDTO email_file : email_files) {
             email_file.setMail_num(mail_num);
         }
+
         emailrepository.emailFileInsert(email_files);
     }
 
