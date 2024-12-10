@@ -58,7 +58,7 @@ public class EmployeeController {
             session.setAttribute("emp_email", managerEmployeeDTO.getEmp_email());
             session.setAttribute("emp_dept", managerEmployeeDTO.getEmp_dept());
             session.setAttribute("emp_rank", managerEmployeeDTO.getEmp_rank());
-            session.setMaxInactiveInterval(5); // 세션 유효 시간을 10 분으로 설정.
+            session.setMaxInactiveInterval(600); // 세션 유효 시간을 10 분으로 설정.
             return "main/emp_main";
         }
         return "Employee/employee_login";
