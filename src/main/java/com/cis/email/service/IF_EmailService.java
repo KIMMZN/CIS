@@ -18,4 +18,5 @@ public interface IF_EmailService {
     public List<EmailFileDTO> emailFileNameFind(List<String> file_name) throws Exception;
     public EmailFileDTO emailFileFind(String file_name) throws Exception;
     public String recipientIdCheck(String recipient_id) throws Exception;
+    public String recipientIdNameCheck(String recipient_id) throws Exception;
 }
