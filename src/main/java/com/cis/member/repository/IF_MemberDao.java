@@ -80,7 +80,7 @@ public interface IF_MemberDao {
     public void manager_insert_new_employee_info(ManagerDTO member) throws Exception;
 
     // 관리자 신규 사원 정볼 등록시, employee 테이블에도 주민번호를 입력
-    public void insert_new_employee_rrn_in_employee(String rrn) throws Exception;
+    public void insert_new_employee_rrn_in_employee(String rrn, String r_num) throws Exception;
 
     // 사원이 정보를 완성할 필요가 있는 사원의 정보 리스트
     public List<ManagerEmployeeDTO> select_list_need_complete(int startIndex, int pageSize) throws Exception;
