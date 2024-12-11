@@ -375,4 +375,14 @@ public class EmployeeController {
         return "redirect:manager_main";
     }
 
+    // 일반사원 로그인 에서 "뒤로가기" 버튼 클릭.
+    @GetMapping(value="main_login")
+    public String main_login() throws Exception{
+        return "total_login";
+    }
+
+
+
+
+
 }
