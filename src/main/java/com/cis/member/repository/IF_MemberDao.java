@@ -16,7 +16,6 @@ import java.util.List;
 public interface IF_MemberDao {
 
     // -------------------- 일반사원 --------------------
-
     // 전체 사원 리스트 조회.
     public List<ManagerEmployeeDTO> selectAll(int startIndex, int pageSize) throws Exception;
 
@@ -75,7 +74,6 @@ public interface IF_MemberDao {
     // 전체 사원리스트에서 콤보박스로 선택한 재직상태의 인원수
     public int total_selected_work_status_employee_count(String work_status) throws Exception;
 
-    // ==================================
     // 관리자 신규 사원 정보 등록
     public void manager_insert_new_employee_info(ManagerDTO member) throws Exception;
 
