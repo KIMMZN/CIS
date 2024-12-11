@@ -337,8 +337,11 @@ public class EmployeeController {
         System.out.println("EmployeeController_관리자가 신규 등록한 사원의 정보 : " + member.toString());
         memberService.add_new_employee_info(member);
         System.out.println("EmployeeController_rrn : " + member.getResident_num());
+        int num = (int)(Math.random()*8999)+1000;
+        String r_num = String.valueOf(num);
+        System.out.println("생성한 랜덤 숫자 : " + r_num);
         String rrn = member.getResident_num();
-        memberService.add_new_employee_rrn_in_employee(rrn);
+        memberService.add_new_employee_rrn_in_employee(rrn,r_num);
         return "main/manager_main";
     }
 

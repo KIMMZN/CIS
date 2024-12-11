@@ -258,9 +258,9 @@ public class MemberServiceImpl implements IF_MemberService{
     }
 
     @Override
-    public void add_new_employee_rrn_in_employee(String rrn) throws Exception {
+    public void add_new_employee_rrn_in_employee(String rrn, String r_num) throws Exception {
         System.out.println("MemberServiceImpl_rrn_확인 : " + rrn);
-        memberdao.insert_new_employee_rrn_in_employee(rrn);
+        memberdao.insert_new_employee_rrn_in_employee(rrn, r_num);
     }
 
     @Override
