@@ -367,7 +367,9 @@ public class EmployeeController {
         return "Manager/manager_add_new_employee_info";
     }
 
-
-
+    @GetMapping(value="manager_main_page")
+    public String manager_main() throws Exception{
+        return "redirect:manager_main";
+    }
 
 }
