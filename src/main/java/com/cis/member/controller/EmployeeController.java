@@ -36,7 +36,6 @@ public class EmployeeController {
     public String start_page() throws Exception{
         System.out.println("시작화면");
         return "total_login";
-//        return "Manager/manager_add_new_employee_info";
     }
 
 
@@ -132,7 +131,6 @@ public class EmployeeController {
     }
 
 
-
     // ========================= 관리자 ========================
 
     // "관리자 로그인" 선택시.
@@ -149,8 +147,6 @@ public class EmployeeController {
         boolean check_result = memberService.check_manager_pass(pass);
         if (check_result) {
             HttpSession session = request.getSession();
-//            session.setAttribute("emp_name","관리자"); // 관리자 세션 추가.
-//            session.setAttribute("emp_name","admin"); // 관리자 세션 추가.
             session.setAttribute("admin","admin"); // 관리자 세션 추가
             String emp_id = (String) session.getAttribute("admin");
             String emp_name = ifboardservice.getNameById(emp_id);
@@ -274,27 +270,6 @@ public class EmployeeController {
         departmentCodes.add(new DepartmentCode("human_resources", "인사팀"));
         return departmentCodes;
     }
-
-    // 관리자 직원 정보 추가가 필요한 사원에 리스트 조회.(전체사원 리스트에서 "직원정보 추가"버튼 클릭.)
-//    @GetMapping(value="complete_employee_info")
-//    public String complete_employee_info(@RequestParam(defaultValue = "1") int page, Model model) throws Exception{
-//        System.out.println("$$$$$$$$");
-//        int totalCount = memberService.total_count_number_need_add_info();
-//        System.out.println("EmployeeController_정보 추가가 필요한 사원의 인원수 : " + totalCount + " / " + page);
-//        Pagination pagination = new Pagination(10, totalCount, page);
-//        int startIndex = pagination.getStartIndex();
-//        int pageSize = pagination.getPageSize();
-//        pagination.setSelectPage(page);
-//        List<ManagerEmployeeDTO> list = memberService.get_need_complete_employee_list(startIndex, pageSize);
-//        for(ManagerEmployeeDTO member : list){
-//            System.out.println("EmployeeController_추가 필요한 사원들의 정보 : " + member.toString());
-//        }
-//        System.out.println("EmployeeeController_페이징*** : " + pagination);
-//        model.addAttribute("pagination", pagination);
-//        model.addAttribute("need_complete_list", list);
-//        System.out.println("$$$$$$$$----");
-//        return "Manager/total_employee_list_need_add_info";
-//    }
 
     // 관리자가 직원 정보를 완성시킬 수 있게하는 정보 입력 화면으로 이동.
     @GetMapping(value="manager_complete_employee_info")
