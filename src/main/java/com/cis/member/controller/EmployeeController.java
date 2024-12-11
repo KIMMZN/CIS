@@ -3,7 +3,10 @@ package com.cis.member.controller;
 import com.cis.Pagination;
 import com.cis.attendance.dto.AttendanceDTO;
 import com.cis.attendance.service.IF_AttendanceService;
+import com.cis.board.paging.PagingResponse;
 import com.cis.board.service.IF_board_service;
+import com.cis.board.vo.boardVO;
+import com.cis.board.vo.searchDTO;
 import com.cis.member.dto.*;
 import com.cis.member.service.IF_MemberService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -65,8 +68,24 @@ public class EmployeeController {
 
             // 메인화면 목록 리스트 출력하기
             // 자유게시판
+            searchDTO params = new searchDTO();
+            params.setPage(1);
+            params.setRecordSize(3);
+            params.setPageSize(1);
+            PagingResponse<boardVO> boardvolist = ifboardservice.findAllPost_fr(params);
+//            if (boardvolist == null || boardvolist.getList() == null) {
+//                boardvolist = new PagingResponse<>();
+//                boardvolist.setList(new ArrayList<>()); // 빈 리스트로 초기화
+//            }
+
 
             // 공지사항
+            searchDTO paramsg = new searchDTO();
+            paramsg.setPage(1);
+            paramsg.setRecordSize(3);
+            paramsg.setPageSize(1);
+            PagingResponse<boardVO> boardvolistg = ifboardservice.findAllPost(paramsg);
+            //
 
             // 근태관리
             Pagination pagination = new Pagination(6, 3, 1);
@@ -76,6 +95,8 @@ public class EmployeeController {
             List<AttendanceDTO> attendance_list = attendanceService.attendanceList(userId, pagination);
 
             model.addAttribute("attendance_list", attendance_list);
+            model.addAttribute("boardvolist", boardvolist);
+            model.addAttribute("boardvolistg", boardvolistg);
             // 개인업무
 
 
