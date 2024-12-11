@@ -1,12 +1,7 @@
 package com.cis.member.controller;
 
 import com.cis.Pagination;
-import com.cis.attendance.dto.AttendanceDTO;
-import com.cis.attendance.service.IF_AttendanceService;
-import com.cis.board.paging.PagingResponse;
 import com.cis.board.service.IF_board_service;
-import com.cis.board.vo.boardVO;
-import com.cis.board.vo.searchDTO;
 import com.cis.member.dto.*;
 import com.cis.member.service.IF_MemberService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,7 +24,6 @@ public class EmployeeController {
     @Autowired
     IF_MemberService memberService;
     private final IF_board_service  ifboardservice;
-    private final IF_AttendanceService attendanceService;
 
     // 전체 로그인 (로그인 방식 선택.)
     @GetMapping(value="/")
@@ -51,7 +45,7 @@ public class EmployeeController {
 
     // 일반사원 로그인.
     @RequestMapping(value="employee_login_action")
-    public String employee_login_action(HttpServletRequest request, Model model) throws Exception {
+    public String employee_login_action(HttpServletRequest request) throws Exception {
         System.out.println("=== Employee/employee_login 진입 ===");
         String userId = request.getParameter("emp_id");
         String userPass = request.getParameter("emp_pass");
@@ -65,41 +59,6 @@ public class EmployeeController {
             session.setAttribute("emp_dept", managerEmployeeDTO.getEmp_dept());
             session.setAttribute("emp_rank", managerEmployeeDTO.getEmp_rank());
             session.setMaxInactiveInterval(600); // 세션 유효 시간을 10 분으로 설정.
-
-            // 메인화면 목록 리스트 출력하기
-            // 자유게시판
-            searchDTO params = new searchDTO();
-            params.setPage(1);
-            params.setRecordSize(3);
-            params.setPageSize(1);
-            PagingResponse<boardVO> boardvolist = ifboardservice.findAllPost_fr(params);
-//            if (boardvolist == null || boardvolist.getList() == null) {
-//                boardvolist = new PagingResponse<>();
-//                boardvolist.setList(new ArrayList<>()); // 빈 리스트로 초기화
-//            }
-
-
-            // 공지사항
-            searchDTO paramsg = new searchDTO();
-            paramsg.setPage(1);
-            paramsg.setRecordSize(3);
-            paramsg.setPageSize(1);
-            PagingResponse<boardVO> boardvolistg = ifboardservice.findAllPost(paramsg);
-            //
-
-            // 근태관리
-            Pagination pagination = new Pagination(6, 3, 1);
-            pagination.setStartIndex(0);
-            pagination.setPageSize(3);
-
-            List<AttendanceDTO> attendance_list = attendanceService.attendanceList(userId, pagination);
-
-            model.addAttribute("attendance_list", attendance_list);
-            model.addAttribute("boardvolist", boardvolist);
-            model.addAttribute("boardvolistg", boardvolistg);
-            // 개인업무
-
-
             return "main/emp_main";
         }
         return "Employee/employee_login";
@@ -114,6 +73,15 @@ public class EmployeeController {
         return "Employee/employee_login";
 //        return "main/emp_main"; // 세션 비활성화 성공 여부 확인 코드.
     }
+
+    // 뒤로가기
+    @GetMapping(value="back_btn")
+    public String back_btn(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "total_login";
+    }
+
 
 
     // 일반 사원 "사원가입" 화면으로 이동.
@@ -349,8 +317,8 @@ public class EmployeeController {
         Pagination pagination = new Pagination(10,totalCount, page);
         int startIndex = pagination.getStartIndex();
         int pageSize = pagination.getPageSize();
-        pagination.setSelectPage(page);;
-        System.out.println("정보 보충이 필요한 사원의 인원수 : " + totalCount);
+        pagination.setSelectPage(page);
+        System.out.println("EmployeeController_정보 보충이 필요한 사원의 인원수 : " + totalCount);
         List<ManagerEmployeeDTO> list = memberService.employee_need_complete(startIndex, pageSize);
         for(ManagerEmployeeDTO member : list){
             System.out.println("EmployeeController_need_complete : " + member.toString());
