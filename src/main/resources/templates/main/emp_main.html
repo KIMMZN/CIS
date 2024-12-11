@@ -37,21 +37,19 @@
             <div class="list_one">
                 <a href="board_fr"><span class="list_label">자유게시판</span></a>
                 <div class="list_container">
-                    <!-- 게시판 목록(최신) 3개 -->
+<!--                     게시판 목록(최신) 3개-->
                     <table>
                         <thead>
-                            <tr id="board_empty">
+                            <tr id="board_empty" th:if="${boardvolist == null or #lists.isEmpty(boardvolist.list)}">
                                 <td class="empty" colspan="2">게시글이 존재하지 않습니다.</td>
                             </tr>
                         </thead>
-                        <tbody id="board_list">
-                            <tr>
-                                <td class="td_one"><a href="" class="td_link">최신 게시글 제목</a></td>
-                                <td class="td_two"><a href="" class="td_link">24-11-21</a></td>
-                            </tr>
-                            <tr>
-                                <td class="td_one"><a href="" class="td_link">게시글 제목은 총 20글자입니다.</a></td>
-                                <td class="td_two"><a href="" class="td_link">24-11-21</a></td>
+                        <tbody id="board_list" th:if="${boardvolist != null and !#lists.isEmpty(boardvolist.list)}">
+                            <tr th:each="frlist: ${boardvolist.list}">
+
+                                <td class="td_one"><a th:href="@{/fr_preview/{board_num}(board_num=${frlist.board_num})}" th:text="${frlist.board_title}"></a></td>
+                                <td th:text="${frlist.create_at}" class="td_two"></td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -63,18 +61,14 @@
                     <!-- 게시판 목록(공지사항) 3개 -->
                     <table>
                         <thead>
-                            <tr id="notice_empty">
+                            <tr id="notice_empty" th:if="${boardvolistg == null or #lists.isEmpty(boardvolistg.list)}">
                                 <td class="empty" colspan="2">공지사항이 존재하지 않습니다.</td>
                             </tr>
                         </thead>
-                        <tbody id="notice_list">
-                            <tr>
-                                <td class="td_one"><a href="" class="td_link">최신 공지사항 제목</a></td>
-                                <td class="td_two"><a href="" class="td_link">24-11-21</a></td>
-                            </tr>
-                            <tr>
-                                <td class="td_one"><a href="" class="td_link">공지사항 제목은 총 20글자입니다.</a></td>
-                                <td class="td_two"><a href="" class="td_link">24-11-21</a></td>
+                        <tbody id="notice_list" th:if="${boardvolistg != null and !#lists.isEmpty(boardvolistg.list)}">
+                            <tr th:each="glist: ${boardvolistg.list}">
+                                <td class="td_one"><a th:href="@{/gj_preview/{board_num}(board_num=${glist.board_num})}" class="td_link" th:text="${glist.board_title}"></a></td>
+                                <td class="td_two" th:text="${glist.create_at}"></td>
                             </tr>
                         </tbody>
                     </table>
