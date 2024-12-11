@@ -73,26 +73,25 @@
         <!-- 페이지네이션 -->
         <div class="paging">
           <!-- 첫 페이지 -->
-          <a th:href="@{/board_gj(page=1, keyword=${keyword}, searchType=${searchType})}">첫 페이지</a>
-
+          <a th:href="@{/board/manager/gj(page=1, keyword=${keyword}, searchType=${searchType})}">첫 페이지</a>
           <!-- 이전 페이지 -->
-          <a th:href="@{/board_gj(page=${boardvolist.pagination.startPage - 1}, keyword=${keyword}, searchType=${searchType})}"
+          <a th:href="@{/board/manager/gj(page=${boardvolist.pagination.startPage - 1}, keyword=${keyword}, searchType=${searchType})}"
              th:if="${boardvolist.pagination.existPrevPage}">이전 페이지</a>
 
           <!-- 페이지 번호 -->
           <span th:each="page : ${#numbers.sequence(boardvolist.pagination.startPage, boardvolist.pagination.endPage)}">
-      <a th:href="@{/board_gj(page=${page}, keyword=${keyword}, searchType=${searchType})}"
+      <a th:href="@{/board/manager/gj(page=${page}, keyword=${keyword}, searchType=${searchType})}"
          th:text="${page}"
          th:classappend="${page == currentPage} ? 'on' : ''">
       </a>
     </span>
 
           <!-- 다음 페이지 -->
-          <a th:href="@{/board_gj(page=${boardvolist.pagination.endPage + 1}, keyword=${keyword}, searchType=${searchType})}"
+          <a th:href="@{/board/manager/gj(page=${boardvolist.pagination.endPage + 1}, keyword=${keyword}, searchType=${searchType})}"
              th:if="${boardvolist.pagination.existNextPage}" class="page_bt next">다음 페이지</a>
 
           <!-- 마지막 페이지 -->
-          <a th:href="@{/board_gj(page=${boardvolist.pagination.totalPageCount}, keyword=${keyword}, searchType=${searchType})}"
+          <a th:href="@{/board/manager/gj(page=${boardvolist.pagination.totalPageCount}, keyword=${keyword}, searchType=${searchType})}"
              th:if="${boardvolist.pagination.existNextPage}" class="page_bt last">마지막 페이지</a>
         </div>
       </div>
