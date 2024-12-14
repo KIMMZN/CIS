@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CIS : 메일</title>
+  <title>CIS : 공지사항</title>
   <link rel="stylesheet" href="/css/layout/base.css"/>
   <link rel="stylesheet" href="/css/board/board_base.css"/>
   <link rel="stylesheet" href="/css/board/board_main.css">
@@ -17,10 +17,10 @@
     <div class="mail_container">
       <div class="mail_btn">
         <a href="/board_gj">
-          <input type="button" value="공지사항" class="mail_delete">
+          <input type="button" value="공지사항" class="board_one" onclick="selectButton(this)">
         </a>
         <a href="/board_fr">
-          <input type="button" value="자유게시판" class="mail_delete">
+          <input type="button" value="자유게시판" class="board_two" onclick="selectButton(this)">
         </a>
       </div>
       <div id="board_select_title">
