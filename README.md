@@ -50,22 +50,14 @@ CIS/
 ├── README.md            # 프로젝트 설명 파일
 └── ...
 
-## 📑 프로젝트 결과물
+📑 프로젝트 결과물
+발표 자료: 프로젝트 발표자료
+GitHub Repository: CIS Repository
 
-- **발표 자료**: [프로젝트 발표자료](https://www.canva.com/design/DAGZhVj4ND8/a8uZV7mzYtYJbl1dd79_IA/edit)
-- **GitHub Repository**: [CIS Repository](https://github.com/KIMMZN/CIS)
-
----
-
-## 🏆 느낀 점 및 성과
-
-- **문제 해결 경험**: 데이터 매핑 오류를 디버깅하며 백엔드와 프론트엔드 간 데이터 흐름의 중요성을 배웠습니다.
-- **협업의 중요성**: Git을 활용한 코드 형상 관리와 팀원 간 협업을 통해 프로젝트를 효율적으로 완수할 수 있었습니다.
-- **기술 숙련도**: Spring Boot, MyBatis, MySQL 등 주요 기술 스택에 대한 이해도를 높였습니다.
-
----
-
-## 📧 문의
-
-- **Email**: [tkdlqhrm222@gmail.com](mailto:tkdlqhrm222@gmail.com)
-- **GitHub**: [KIMMZN](https://github.com/KIMMZN)
+🏆 느낀 점 및 성과
+문제 해결 경험: 데이터 매핑 오류를 디버깅하며 백엔드와 프론트엔드 간 데이터 흐름의 중요성을 배웠습니다.
+협업의 중요성: Git을 활용한 코드 형상 관리와 팀원 간 협업을 통해 프로젝트를 효율적으로 완수할 수 있었습니다.
+기술 숙련도: Spring Boot, MyBatis, MySQL 등 주요 기술 스택에 대한 이해도를 높였습니다.
+📧 문의
+Email: tkdlqhrm222@gmail.com
+GitHub: KIMMZN
