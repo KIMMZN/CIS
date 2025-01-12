@@ -14,6 +14,30 @@ Corporate Integrated System(CIS)은 **Spring Boot**를 기반으로 개발된 **
 
 ---
 
+## 💻 사용 기술 스택
+
+### **Frontend**
+- **HTML/CSS/JavaScript**: UI 디자인 및 상호작용 구현
+- **Thymeleaf**: Spring Boot와의 템플릿 엔진 통합
+
+### **Backend**
+- **Java**: Spring Boot 기반 애플리케이션 개발
+- **Spring Boot**: 애플리케이션의 핵심 프레임워크
+- **Spring Security**: 인증 및 권한 관리
+- **MyBatis**: 데이터 매핑 및 ORM 지원
+- **Gradle**: 프로젝트 빌드 및 의존성 관리
+
+### **Database**
+- **MySQL**: 데이터 저장 및 관리  
+- **DBeaver**: 데이터베이스 관리 도구
+
+### **Version Control**
+- **Git/GitHub**: 코드 형상 관리 및 협업
+
+### **Development Tools**
+- **IntelliJ IDEA**: 통합 개발 환경(IDE)  
+- **Visual Studio Code**: 코드 편집 및 프론트엔드 작업  
+
 ## 📌 주요 기능
 
 1. **회원 게시판**: 사내 소통을 위한 게시판 기능 제공  
