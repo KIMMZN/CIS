@@ -23,7 +23,6 @@ Corporate Integrated System(CIS)은 **Spring Boot**를 기반으로 개발된 **
 ### **Backend**
 - **Java**: Spring Boot 기반 애플리케이션 개발
 - **Spring Boot**: 애플리케이션의 핵심 프레임워크
-- **Spring Security**: 인증 및 권한 관리
 - **MyBatis**: 데이터 매핑 및 ORM 지원
 - **Gradle**: 프로젝트 빌드 및 의존성 관리
 
@@ -40,7 +39,7 @@ Corporate Integrated System(CIS)은 **Spring Boot**를 기반으로 개발된 **
 
 ## 📌 주요 기능
 
-1. **회원 게시판**: 사내 소통을 위한 게시판 기능 제공  
+1. **회원 게시판**: 사내 소통을 위한 게시판 기능(CRUD) 제공  
 2. **사내 이메일 시스템**: 사내 이메일 전송 및 관리  
 3. **근태 관리**: 직원 근태 정보 효율적으로 관리  
 4. **관리자 기능**: 회원 정보 및 게시판 관리  
