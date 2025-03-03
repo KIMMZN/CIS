@@ -1,14 +1,17 @@
-# CIS
-# Corporate Integrated System (CIS)
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/6ba93bab-c9eb-48da-94d3-844ade8b44d8" alt="image" width="300">
+  <br>
+  <h2>Java기반 웹프로잭트 풀스택 수업 Final 프로젝트</h2>
+  <br>
+  <strong>"원활한 커뮤니케이션으로 향한 첫 걸음"</strong>
+  <hr>
+</div>
 
-![GitHub stars](https://img.shields.io/github/stars/KIMMZN/CIS?style=social) ![GitHub forks](https://img.shields.io/github/forks/KIMMZN/CIS?style=social)  
-> 기업 내 소통과 관리의 효율성을 높이기 위해 설계된 통합환경 시스템입니다.  
-> **기간**: 2024.11.14 ~ 2024.12.13  
-
----
 
 ## 📜 프로젝트 소개
-
+**개발기간**: 2024.11.14 ~ 2024.12.13 <br>
+**프로젝트명**: Corporate Integrated System(CIS) <br>
+<br>
 Corporate Integrated System(CIS)은 **Spring Boot**를 기반으로 개발된 **기업용 통합환경 시스템**입니다.  
 주요 기능으로는 회원 게시판, 사내 이메일, 근태 관리, 관리자 기능 등이 포함되어 있으며, 기업 내 소통과 관리 프로세스를 지원합니다.
 
