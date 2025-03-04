@@ -1,9 +1,14 @@
 package com.cis.board.util;
 
 import com.cis.board.vo.fileVO;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -19,15 +24,31 @@ import java.util.List;
 import java.util.UUID;
 
 
-@Component
 @Getter
+@Setter
+@Component
+@ConfigurationProperties(prefix = "file")
 public class FIleDataUtil {
 
 
-    // 파일 저장 경로 설정
-    private final String uploadDir ="C:/Users/13/Desktop/folder/파이널프로젝트자료/filefolder";
-    private final Path uploadDirPath = Paths.get(uploadDir); // Path 객체 생성
+    private String uploadDir;
+    private Path uploadDirPath;
 
+
+    // 📌 Bean이 생성된 후 실행되도록 설정
+    @PostConstruct
+    public void init() {
+        if (uploadDir == null || uploadDir.isEmpty()) {
+            throw new IllegalStateException("파일 저장 경로 (uploadDir) 가 설정되지 않았습니다.");
+        }
+
+        this.uploadDirPath = Paths.get(uploadDir);
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs(); // 📌 폴더 없으면 자동 생성
+        }
+        System.out.println("📂 파일 저장 경로 설정 완료: " + uploadDirPath);
+    }
 
     //배열로 이름 리턴
 
