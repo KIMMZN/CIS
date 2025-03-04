@@ -55,7 +55,19 @@ public class EmployeeController {
         String userId = request.getParameter("emp_id");
         String userPass = request.getParameter("emp_pass");
         ManagerEmployeeDTO managerEmployeeDTO = memberService.login_employee_info(userId);
-        String password = managerEmployeeDTO.getEmp_pass();
+//        String password = managerEmployeeDTO.getEmp_pass();
+
+        String password = null;
+        if(managerEmployeeDTO == null){
+            managerEmployeeDTO = new ManagerEmployeeDTO();
+            password = managerEmployeeDTO.getEmp_pass();
+            System.out.println("managerEmployeeDTO가 null입니다.");
+        }else {
+            password = managerEmployeeDTO.getEmp_pass();
+            System.out.println("managerEmployeeDTO: " + managerEmployeeDTO.getEmp_pass());
+        }
+
+
         if(userPass.equals(password)){
             HttpSession session = request.getSession(); // 세션 생성
             session.setAttribute("emp_name", managerEmployeeDTO.getEmp_name());

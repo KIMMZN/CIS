@@ -1,13 +1,22 @@
+/* board_base.css 내 section */
 section {
     width: 98%;
-    height: 61%;
+    /* height: 61%; <-- 이 부분 제거 or 주석 */
+    min-height: 600px; /* 원하는 최소 높이 */
     border: 1px solid #EBEBEB;
     border-radius: 15px;
     padding: 10px;
+
+    /* flex 중앙정렬을 꼭 써야 한다면, align-items: flex-start; 로 변경 */
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: flex-start; !* 가운데로 너무 압축되지 않도록 *!*/
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .mail_container {
     width: 97.3%;
     height: 94%;
