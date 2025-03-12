@@ -37,18 +37,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚀 SSH 키 디코딩 및 저장
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" | base64 --decode > ~/.ssh/deploy_key.pem
-          chmod 600 ~/.ssh/deploy_key.pem  # SSH 키 권한 설정
-
       - name: 🚀 원격 서버 접속 및 컨테이너 재배포
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
-          key_path: ~/.ssh/deploy_key.pem
+          # pem 파일로 만들지 않고, 시크릿에 등록된 SSH 키 자체를 바로 사용
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/springboot-app
             docker stop springboot_app || true
