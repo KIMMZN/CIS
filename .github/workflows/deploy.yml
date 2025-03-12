@@ -3,7 +3,7 @@ name: 🚀 CI/CD for Spring Boot with Docker
 on:
   push:
     branches:
-      - main  # main 브랜치에 push될 때 실행됨
+      - main  # main 브랜치에 push될 때만 실행
 
 jobs:
   build:
@@ -42,7 +42,8 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
-          # pem 파일로 만들지 않고, 시크릿에 등록된 SSH 키 자체를 바로 사용
+          # .pem 파일 내용 전체(-----BEGIN ~ END-----)를
+          # 그대로 GitHub Secrets에 넣었다면, 아래처럼 사용합니다.
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/springboot-app
