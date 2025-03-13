@@ -3,7 +3,7 @@ name: 🚀 CI/CD for Spring Boot with Docker
 on:
   push:
     branches:
-      - main  # main 브랜치에 push될 때만 실행
+      - main  # main 브랜치에 push될 때 실행
 
 jobs:
   build:
@@ -37,16 +37,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 🚀 SSH 키 디코딩 및 저장
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" | base64 --decode > ~/.ssh/deploy_key.pem
+          chmod 600 ~/.ssh/deploy_key.pem  # SSH 키 권한 설정
+
       - name: 🚀 원격 서버 접속 및 컨테이너 재배포
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
-          # .pem 파일 내용 전체(-----BEGIN ~ END-----)를
-          # 그대로 GitHub Secrets에 넣었다면, 아래처럼 사용합니다.
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          key_path: ~/.ssh/deploy_key.pem
           script: |
+            # MySQL 컨테이너 실행 (존재하지 않으면 생성)
+            docker run -d --name mysql_db --restart always \
+              -e MYSQL_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }} \
+              -e MYSQL_DATABASE=${{ secrets.DB_NAME }} \
+              -e MYSQL_USER=${{ secrets.DB_USERNAME }} \
+              -e MYSQL_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -p 3306:3306 \
+              mysql:8 || true
+
+            # 애플리케이션 컨테이너 업데이트
             docker pull ${{ secrets.DOCKER_USERNAME }}/springboot-app
             docker stop springboot_app || true
             docker rm springboot_app || true
-            docker run -d --name springboot_app -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/springboot-app
+            docker run -d --name springboot_app -p 8080:8080 \
+              -e SPRING_PROFILES_ACTIVE=ec2 \
+              -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/${{ secrets.DB_NAME }}?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false \
+              -e SPRING_DATASOURCE_USERNAME=${{ secrets.DB_USERNAME }} \
+              -e SPRING_DATASOURCE_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              --network app-network \
+              ${{ secrets.DOCKER_USERNAME }}/springboot-app
