@@ -37,29 +37,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚀 SSH 키 디코딩 및 저장
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" | base64 --decode > ~/.ssh/deploy_key.pem
-          chmod 600 ~/.ssh/deploy_key.pem  # SSH 키 권한 설정
-
       - name: 🚀 원격 서버 접속 및 컨테이너 재배포
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
-          key_path: ~/.ssh/deploy_key.pem
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            # MySQL 컨테이너 실행 (존재하지 않으면 생성)
+            # 🐳 Docker 네트워크 생성 (이미 존재하면 무시)
+            docker network create app-network || true
+
+            # 🗄️ MySQL 컨테이너 실행 (존재하지 않으면 생성)
+            docker ps -q --filter "name=mysql_db" | grep -q . || \
             docker run -d --name mysql_db --restart always \
               -e MYSQL_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }} \
               -e MYSQL_DATABASE=${{ secrets.DB_NAME }} \
               -e MYSQL_USER=${{ secrets.DB_USERNAME }} \
               -e MYSQL_PASSWORD=${{ secrets.DB_PASSWORD }} \
               -p 3306:3306 \
-              mysql:8 || true
+              --network app-network \
+              mysql:8
 
-            # 애플리케이션 컨테이너 업데이트
+            # 🚀 애플리케이션 컨테이너 업데이트
             docker pull ${{ secrets.DOCKER_USERNAME }}/springboot-app
             docker stop springboot_app || true
             docker rm springboot_app || true
