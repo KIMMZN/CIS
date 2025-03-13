@@ -89,7 +89,7 @@ public class Board_Manager_Controller {
         model.addAttribute("currentPage", params.getPage());
         model.addAttribute("admLoginFlag", admLoginFlag);
 
-        return "/board/board_mng/board_Admin";
+        return "board/board_mng/board_Admin";
     }
 
     //관리자 게시판 글 보기/
@@ -170,7 +170,7 @@ public class Board_Manager_Controller {
                 model.addAttribute("category", category);
                 System.out.println(boardvo.toString() + "boardvo");
 
-                return "/board/board_mng/fr_preview";
+                return "board/board_mng/fr_preview";
     }
 
 
@@ -392,7 +392,7 @@ public class Board_Manager_Controller {
         // 현재 페이지 추가
         model.addAttribute("currentPage", params.getPage());
         model.addAttribute("loginFlag", loginFlag);
-        return "/board/board_mng/board_gj";
+        return "board/board_mng/board_gj";
 
     }
 
@@ -460,7 +460,7 @@ public class Board_Manager_Controller {
         model.addAttribute("fileList", fileList);
         model.addAttribute("emp_name", emp_name);
         System.out.println(loginFlag+"로긴 플래그 관리자");
-        return "/board/board_mng/gj_preview";
+        return "board/board_mng/gj_preview";
     }
 
     //공지사항 게시판 글쓰기. session 작업중.
@@ -483,7 +483,7 @@ public class Board_Manager_Controller {
         model.addAttribute("emp_id", emp_id);
         model.addAttribute("userName", name);
 
-        return "/board/board_mng/write_gj";
+        return "board/board_mng/write_gj";
     }
 
     //글쓰기 자유 + 공지

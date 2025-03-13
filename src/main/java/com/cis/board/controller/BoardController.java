@@ -119,7 +119,7 @@ public class BoardController {
         // 현재 페이지 추가
         model.addAttribute("currentPage", params.getPage());
         model.addAttribute("loginFlag", loginFlag);
-        return "/board/board_gj";
+        return "board/board_gj";
 
     }
 
@@ -144,7 +144,7 @@ public class BoardController {
         //유저이름을 모델을 통해 뷰로
         model.addAttribute("emp_id", emp_id);
         model.addAttribute("userName", name);
-        return "/board/write_gj";
+        return "board/write_gj";
     }
 
     //글쓰기 자유 + 공지
@@ -231,7 +231,7 @@ public class BoardController {
 
         model.addAttribute("currentPage", params.getPage());
 
-        return "/board/board_fr";
+        return "board/board_fr";
     }
 
     //자유게시판 글쓰기 클릭했을시 + id확인하고 이름 불러오기 + session 추가
@@ -256,7 +256,7 @@ public class BoardController {
             model.addAttribute("rank", rank);
 
 
-            return "/board/write_fr";
+            return "board/write_fr";
 
         } else if (session.getAttribute("admin") != null) {
             System.out.println("자유게시판 글쓰기!");
@@ -271,7 +271,7 @@ public class BoardController {
             String rank = (String) session.getAttribute("emp_rank");
             model.addAttribute("emp_id", emp_id);
             model.addAttribute("emp_name", emp_name);
-            return "/board/write_fr";
+            return "board/write_fr";
 
         } else {
 
@@ -349,7 +349,7 @@ public class BoardController {
         model.addAttribute("fileList", fileList);
         model.addAttribute("emp_name", emp_name);
         System.out.println(loginFlag+"로긴 플래그 관리자");
-        return "/board/gj_preview";
+        return "board/gj_preview";
     }
 
 
@@ -413,7 +413,7 @@ public class BoardController {
         model.addAttribute("emp_name", emp_name);
         System.out.println(boardvo.toString() + "boardvo");
 
-        return "/board/fr_preview";
+        return "board/fr_preview";
 
 
 
