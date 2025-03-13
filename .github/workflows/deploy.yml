@@ -64,8 +64,8 @@ jobs:
             docker rm springboot_app || true
             docker run -d --name springboot_app -p 8080:8080 \
               -e SPRING_PROFILES_ACTIVE=ec2 \
-              # -e SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/${{ secrets.DB_NAME }}?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false \
-              # -e SPRING_DATASOURCE_USERNAME=${{ secrets.DB_USERNAME }} \
-              # -e SPRING_DATASOURCE_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_NAME=${{ secrets.DB_NAME }} \
+              -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
               --network app-network \
               ${{ secrets.DOCKER_USERNAME }}/springboot-app
