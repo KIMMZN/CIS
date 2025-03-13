@@ -62,7 +62,7 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/springboot-app
             docker stop springboot_app || true
             docker rm springboot_app || true
-            docker run -d --name springboot_app -p 8080:8080 \
+            docker run -d --name springboot_app --restart always -p 8080:8080 \
               -e SPRING_PROFILES_ACTIVE=ec2 \
               -e DB_NAME=${{ secrets.DB_NAME }} \
               -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
